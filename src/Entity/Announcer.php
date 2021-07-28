@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AnnouncerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,6 +22,28 @@ class Announcer extends User
      * @ORM\Column(type="text")
      */
     private $description;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="announcer")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Address::class, inversedBy="announcer")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $address;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Advertisement::class, mappedBy="announcer", orphanRemoval=true)
+     */
+    private $advertisements;
+
+    public function __construct()
+    {
+        $this->advertisements = new ArrayCollection();
+    }
 
     public function getName(): ?string
     {
@@ -41,6 +65,60 @@ class Announcer extends User
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?Address $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Advertisement[]
+     */
+    public function getAdvertisements(): Collection
+    {
+        return $this->advertisements;
+    }
+
+    public function addAdvertisement(Advertisement $advertisement): self
+    {
+        if (!$this->advertisements->contains($advertisement)) {
+            $this->advertisements[] = $advertisement;
+            $advertisement->setAnnouncer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdvertisement(Advertisement $advertisement): self
+    {
+        if ($this->advertisements->removeElement($advertisement)) {
+            // set the owning side to null (unless already changed)
+            if ($advertisement->getAnnouncer() === $this) {
+                $advertisement->setAnnouncer(null);
+            }
+        }
 
         return $this;
     }

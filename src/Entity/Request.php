@@ -34,6 +34,12 @@ class Request
      */
     private $dateOfRequest;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Adopter::class, inversedBy="requests")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $adopter;
+
 
 
     public function __construct()
@@ -96,6 +102,18 @@ class Request
     public function setDateOfRequest(\DateTimeInterface $dateOfRequest): self
     {
         $this->dateOfRequest = $dateOfRequest;
+
+        return $this;
+    }
+
+    public function getAdopter(): ?Adopter
+    {
+        return $this->adopter;
+    }
+
+    public function setAdopter(?Adopter $adopter): self
+    {
+        $this->adopter = $adopter;
 
         return $this;
     }

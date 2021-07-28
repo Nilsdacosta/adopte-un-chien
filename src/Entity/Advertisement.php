@@ -44,9 +44,21 @@ class Advertisement
      */
     private $requests;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Dog::class, mappedBy="advertisement")
+     */
+    private $dogs;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Announcer::class, inversedBy="advertisements")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $announcer;
+
     public function __construct()
     {
         $this->requests = new ArrayCollection();
+        $this->dogs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -128,6 +140,48 @@ class Advertisement
                 $request->setAdvertisement(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Dog[]
+     */
+    public function getDogs(): Collection
+    {
+        return $this->dogs;
+    }
+
+    public function addDog(Dog $dog): self
+    {
+        if (!$this->dogs->contains($dog)) {
+            $this->dogs[] = $dog;
+            $dog->setAdvertisement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDog(Dog $dog): self
+    {
+        if ($this->dogs->removeElement($dog)) {
+            // set the owning side to null (unless already changed)
+            if ($dog->getAdvertisement() === $this) {
+                $dog->setAdvertisement(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getAnnouncer(): ?Announcer
+    {
+        return $this->announcer;
+    }
+
+    public function setAnnouncer(?Announcer $announcer): self
+    {
+        $this->announcer = $announcer;
 
         return $this;
     }
