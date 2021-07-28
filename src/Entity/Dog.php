@@ -64,6 +64,12 @@ class Dog
      */
     private $pictures;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Advertisement::class, inversedBy="dogs")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $advertisement;
+
     public function __construct()
     {
         $this->breeds = new ArrayCollection();
@@ -212,6 +218,18 @@ class Dog
                 $picture->setDog(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAdvertisement(): ?Advertisement
+    {
+        return $this->advertisement;
+    }
+
+    public function setAdvertisement(?Advertisement $advertisement): self
+    {
+        $this->advertisement = $advertisement;
 
         return $this;
     }
