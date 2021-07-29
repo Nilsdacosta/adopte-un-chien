@@ -70,6 +70,11 @@ class Dog
      */
     private $advertisement;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $Sex;
+
     public function __construct()
     {
         $this->breeds = new ArrayCollection();
@@ -230,6 +235,18 @@ class Dog
     public function setAdvertisement(?Advertisement $advertisement): self
     {
         $this->advertisement = $advertisement;
+
+        return $this;
+    }
+
+    public function getSex(): ?bool
+    {
+        return $this->Sex;
+    }
+
+    public function setSex(bool $Sex): self
+    {
+        $this->Sex = $Sex;
 
         return $this;
     }
