@@ -45,6 +45,7 @@ class Request
     public function __construct()
     {
         $this->messages = new ArrayCollection();
+        $this->dateOfRequest = new \DateTime('now');
     }
 
     public function getId(): ?int
