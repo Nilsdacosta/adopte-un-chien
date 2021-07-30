@@ -38,6 +38,11 @@ class Adopter extends User
         $this->requests = new ArrayCollection();
     }
 
+    public function getRoles(): array
+    {
+        return ['ROLE_ADOPTER'];
+    }
+
     public function getName(): ?string
     {
         return $this->name;

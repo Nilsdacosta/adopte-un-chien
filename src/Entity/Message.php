@@ -32,6 +32,10 @@ class Message
      */
     private $request;
 
+    public function __construct(){
+        $this->dateOfSending = new \DateTime('now');
+    }
+
     public function getId(): ?int
     {
         return $this->id;
