@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=MonteCarlo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Georama:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* blueButton: #2B2D42 */
+
+.widthContent{
+    width: 1020px;
+}
+
+a, a:hover, a:focus, a:active {
+    outline: none;
+    text-decoration: none;
+    color: #2b2d42cb;
+    cursor: pointer;
+}
+
+body{
+    font-family: 'Georama', sans-serif;
+}
+
+#logo{
+    width: 90px;
+}
+#logo, i{
+    font-family: 'MonteCarlo', sans-serif;
+}
+
+.liNav{
+    padding: 5px 15px 5px 15px;
+    margin-left: 15px;
+    background: linear-gradient(to top, rgba(43,45,66, 0.8) 0%, rgba(43,45,66, 0.8) 10%, transparent 10.01%) no-repeat left bottom / 0 100%;
+    transition: background-size .5s;
+    font-size: larger;
+}
+.liNavSub:hover{
+    color: #2B2D42;
+    background-size: 100% 100%;
+}
+
+.liNavConnexion{
+    background-color: #2b2d42cb;
+    color: white;
+    border-radius: 7px;
+    padding: 10px 20px 10px 20px;
+    font-size: larger;
+}
+.liNavConnexion:hover{
+    background-color: #2B2D42;
+    color: white;
+}
