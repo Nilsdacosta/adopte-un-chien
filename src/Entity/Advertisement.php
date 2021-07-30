@@ -59,7 +59,9 @@ class Advertisement
     {
         $this->requests = new ArrayCollection();
         $this->dogs = new ArrayCollection();
+        $this->updateDate = new \DateTime('now');
     }
+
 
     public function getId(): ?int
     {
