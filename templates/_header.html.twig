@@ -1,7 +1,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light pb-0">
     <div class="container-lg d-flex justify-content-between widthContent">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{{ path('home') }}">
             <div class="d-flex align-items-end">
                 <img id="logo" src="{{ asset('img/Logo.svg') }}" alt="">
                 <div>
@@ -15,24 +15,24 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <a href="#">
+                <a href="{{ path('home') }}">
                     <li class="nav-item liNav liNavSub">
                         Accueil
                     </li>
                 </a>
-                <a href="#">
+                <a href="{{ path('advertisement') }}">
                     <li class="nav-item liNav liNavSub">
                         Nos annonces
                     </li>
                 </a>
-                <a href="#">
+                <a href="{{ path('faq') }}">
                     <li class="nav-item liNav liNavSub">
                         FAQ
                     </li>
                 </a>
             </ul>
         <div>
-        <a href="#" class="liNavConnexion">
+        <a href="{{ path('app_login') }}" class="liNavConnexion">
             Connexion
         </a>
     </div>
