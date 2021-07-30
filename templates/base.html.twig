@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Welcome!{% endblock %}</title>
     <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('fontawesome/css/all.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     {% block stylesheets %}
     
@@ -13,13 +14,16 @@
     
 </head>
 <body>
-    {% include '_header.html.twig' %}
-    <h1 id="testH1">coucou</h1>
-    {% block body %}{% endblock %}
+    <div id="main">
+        {% include '_header.html.twig' %}
+        <h1 id="testH1">coucou</h1>
+        {% block body %}{% endblock %}
 
-    <script src="{{ asset('js/bootstrap/bootstrap.bundle.min.js') }}"></script>
-    {% block javascripts %}
+        <script src="{{ asset('js/bootstrap/bootstrap.bundle.min.js') }}"></script>
+        {% block javascripts %}
 
-    {% endblock %}
+        {% endblock %}
+        {% include '_footer.html.twig' %}
+    </div>
 </body>
 </html>
