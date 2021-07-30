@@ -1,30 +1,94 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Accueil | Adopte un chien{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <section id="lastAds">
+    <h2>Nos dernières annonces</h2>
+        <article class="card container paddingReset">
+            <div class="row">
+                <div class="d-flex flex-row">
+                    {# Carousel
+                        id à changer pour chaque annonce
+                     #}
+                    <div id="dogSlider" class="carousel slide col-3" data-bs-ride="carousel">
+                        <div class="carousel-inner w-100 h-100">
+                            <div class="carousel-item active w-100 h-100" data-bs-interval="10000">
+                                <div class="bgImageAdDog w-100 h-100" style="background-image: url('https://geo.img.pmdstatic.net/fit/http.3A.2F.2Fprd2-bone-image.2Es3-website-eu-west-1.2Eamazonaws.2Ecom.2Fgeo.2F2019.2F10.2F28.2Fc9c8ea2c-9750-4039-97c1-ce9f592f4ef4.2Ejpeg/1150x647/background-color/ffffff/quality/70/des-chiens-renifleurs-decouvrent-des-sepultures-vieilles-de-3000-ans-en-croatie.jpg')">
+                                </div>
+                            </div>
+                            <div class="carousel-item w-100 h-100" data-bs-interval="20000">
+                                <div class="bgImageAdDog w-100 h-100" style="background-image: url('https://geo.img.pmdstatic.net/fit/http.3A.2F.2Fprd2-bone-image.2Es3-website-eu-west-1.2Eamazonaws.2Ecom.2Fgeo.2F2019.2F10.2F28.2Fc9c8ea2c-9750-4039-97c1-ce9f592f4ef4.2Ejpeg/1150x647/background-color/ffffff/quality/70/des-chiens-renifleurs-decouvrent-des-sepultures-vieilles-de-3000-ans-en-croatie.jpg')">
+                                </div>
+                            </div>
+                            <div class="carousel-item w-100 h-100">
+                                <div class="bgImageAdDog w-100 h-100" style="background-image: url('https://geo.img.pmdstatic.net/fit/http.3A.2F.2Fprd2-bone-image.2Es3-website-eu-west-1.2Eamazonaws.2Ecom.2Fgeo.2F2019.2F10.2F28.2Fc9c8ea2c-9750-4039-97c1-ce9f592f4ef4.2Ejpeg/1150x647/background-color/ffffff/quality/70/des-chiens-renifleurs-decouvrent-des-sepultures-vieilles-de-3000-ans-en-croatie.jpg')">
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#dogSlider" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#dogSlider" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                    {# Fin Carousel #}
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <h4 class="card-title text-center">Beau chien-chien</h4>
+                        <i>Chiens à la recherche d'une famille : <strong>3</strong></i>
+                        <i>Riri : Labrador / Fifi : Berger allemand / Loulou : Bouvier</i>
+                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, facere! Vel ad quaerat tempore labore aperiam officiis a architecto soluta culpa quidem. Sequi totam dolorem non necessitatibus nam animi soluta!</p>
+                        <div><a href="#" class="btn buttonYellow">Voir l'annonce</a></div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <section id="advertisers">
+        <h2 class="text-center">Nos refuges partenaires</h2>
+        <div class="container">
+            <div class="row justify-content-around">
+                <a href="" class='d-flex justify-content-around flex-column d-inline-block advertisersCard'>
+                    <h6>SPA de Lyon</h6>
+                    <i>Nombres d'annonces: 23</i>
+                    <i>Chiens adoptés: 124</i>
+                </a>
+                <a href="" class='d-flex justify-content-around flex-column d-inline-block advertisersCard'>
+                    <h6>SPA de Lyon</h6>
+                    <i>Nombres d'annonces: 23</i>
+                    <i>Chiens adoptés: 124</i>
+                </a>
+                <a href="" class='d-flex justify-content-around flex-column d-inline-block advertisersCard'>
+                    <h6>SPA de Lyon</h6>
+                    <i>Nombres d'annonces: 23</i>
+                    <i>Chiens adoptés: 124</i>
+                </a>
+                <a href="" class='d-flex justify-content-around flex-column d-inline-block advertisersCard'>
+                    <h6>SPA de Lyon</h6>
+                    <i>Nombres d'annonces: 23</i>
+                    <i>Chiens adoptés: 124</i>
+                </a>
+                <a href="" class='d-flex justify-content-around flex-column d-inline-block advertisersCard'>
+                    <h6>SPA de Lyon</h6>
+                    <i>Nombres d'annonces: 23</i>
+                    <i>Chiens adoptés: 124</i>
+                </a>
+                <a href="" class='d-flex justify-content-around flex-column d-inline-block advertisersCard'>
+                    <h6>SPA de Lyon</h6>
+                    <i>Nombres d'annonces: 23</i>
+                    <i>Chiens adoptés: 124</i>
+                </a>
+                <a href="" class='d-flex justify-content-around flex-column d-inline-block advertisersCard'>
+                    <h6>SPA de Lyon</h6>
+                    <i>Nombres d'annonces: 23</i>
+                    <i>Chiens adoptés: 124</i>
+                </a>
+            </div>
+        </div>
+    </section>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/PHP/2-symfony/adopte-un-chien/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/PHP/2-symfony/adopte-un-chien/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem laboriosam, exercitationem impedit quis temporibus amet quas? Culpa fuga iusto dolorem reprehenderit id labore, nobis dolorum, sequi minus veniam quas doloremque?
-    Placeat, aliquam? Corporis ea iure numquam obcaecati nihil harum quae quaerat. Voluptatem, reiciendis fugit suscipit tenetur ipsa exercitationem fugiat reprehenderit impedit distinctio cupiditate eaque. Rerum, perspiciatis mollitia. Magnam, molestias quo?
-    Distinctio delectus fugiat voluptatum quo est enim qui suscipit? Similique doloremque ullam at eos repellendus, error necessitatibus quis non obcaecati molestias officia vel dolores id accusantium quo vero quisquam quidem.
-    Exercitationem aliquid maxime, voluptate optio minus illum voluptates expedita reiciendis cupiditate! Dolorem vero unde itaque voluptate nobis est dolore et nihil beatae impedit cupiditate minima sit quam, accusantium aperiam dolor.
-    Atque, culpa? A excepturi amet ipsa ut illum dolore eius tempore, praesentium quae dolorum, itaque perferendis saepe accusamus ipsum! Totam recusandae molestias eligendi aspernatur esse, qui quia libero iure maxime!
-    Magnam ipsam eos illum magni perferendis? Expedita cupiditate, ipsam rerum recusandae beatae soluta laudantium praesentium labore. Magni, tempora necessitatibus fuga, et sit odit doloribus quisquam repellat, doloremque dicta impedit vitae.
-    Praesentium harum, at velit odit amet hic quaerat, voluptas rerum dicta quas aut totam. Libero, fuga sit. Totam, beatae fugit dignissimos repudiandae velit ut accusamus. Quas dolor sed cum libero?
-    Sapiente ab voluptas veritatis repellat explicabo aut corporis reiciendis, quos a tenetur eaque possimus dolor hic at est culpa ipsum beatae aliquid accusamus inventore odit. Officia optio nulla harum maxime.
-    Vero soluta, adipisci mollitia at doloribus dolores error, est consequuntur natus cupiditate odit eius qui aliquid numquam aut ab cum iusto nihil suscipit explicabo alias quia? Commodi officia vel repudiandae.
-    Fugiat beatae, voluptatum molestiae ipsa quo asperiores soluta enim minus architecto omnis qui quis amet ea id quae excepturi neque facere error. Esse officiis sequi incidunt praesentium vel perspiciatis nobis?</p>
-</div>
 {% endblock %}

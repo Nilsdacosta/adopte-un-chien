@@ -16,13 +16,15 @@
 <body>
     <div id="main">
         {% include '_header.html.twig' %}
-        <h1 id="testH1">coucou</h1>
-        {% block body %}{% endblock %}
+        {# widthContent: Fait office de container avec une max-width à 1020px #}
+        <div class="widthContent"> 
+            {% block body %}{% endblock %}
 
-        <script src="{{ asset('js/bootstrap/bootstrap.bundle.min.js') }}"></script>
-        {% block javascripts %}
+            <script src="{{ asset('js/bootstrap/bootstrap.bundle.min.js') }}"></script>
+            {% block javascripts %}
 
-        {% endblock %}
+            {% endblock %}
+        </div>
         {% include '_footer.html.twig' %}
     </div>
 </body>
