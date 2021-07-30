@@ -15,6 +15,7 @@
     background-color: #fed338c5;
 }
 
+
 /* **************************** */
 /* ********** General ********* */
 /* **************************** */
@@ -33,7 +34,7 @@ body, html{
     min-height:100%;
     margin:0 auto;
     position:relative;
-    padding-bottom: 160px;
+    padding-bottom: 150px;
 }
 .widthContent{
     max-width: 1020px;
@@ -141,16 +142,33 @@ footer{
     height: 100%;
 }
 #advertisers{
-    background-color: grey;
+    background-color: rgba(43,45,66, 0.60);
     padding-top: 15px;
     padding-bottom: 15px;
     margin-top: 15px;
 }
+#advertisers h2{
+    color: #F8F9FA;
+    margin-bottom: 20px;
+}
 .advertisersCard{
-    background-color: white;
+    background-color: #F8F9FA;
+    padding: 15px;
+    max-width: 300px;
     display: inline;
     /* border: 0.3px solid #2B2D42; */
     margin-bottom: 15px;
     /* box-shadow: 0px 0px 5px 0px rgba(43,45,66, 0.60); */
+}
+
+.advertisersCard:hover{
+    box-shadow: inset 0px 0px 5px 0px rgba(43,45,66, 0.60);
+    border-radius: 5px;
+}
+
+#lastAds h2{
+    margin-top: 30px;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
