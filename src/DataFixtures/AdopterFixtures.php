@@ -6,11 +6,12 @@ namespace App\DataFixtures;
 
 
 use App\Entity\Adopter;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use App\Repository\AddressRepository;
 
-class AdopterFixtures extends \Doctrine\Bundle\FixturesBundle\Fixture implements DependentFixtureInterface
+class AdopterFixtures extends Fixture implements DependentFixtureInterface
 {
     protected $addressRepository;
 
@@ -120,16 +121,15 @@ class AdopterFixtures extends \Doctrine\Bundle\FixturesBundle\Fixture implements
             'Bartlett',
             'Barton',
             'Bass', 'Da Costa', 'SaintGeorges', 'Hermant', 'Poirier', 'Ragot'];
-        $randNb = rand(0, count($addresses)-1 );
-        $roles = ['adopter'];
+
         for ($i = 0; $i < 50; $i++) {
+            $randNb = rand(0, count($addresses)-1 );
             $adopter = new Adopter();
             $adopter->setName($names[$i]);
             $adopter->setFirstname($firstnames[$i]);
             $adopter->setEmail($adopter->getName() . '@gmail.com');
             $adopter->setPassword($adopter->getFirstname(). 'pass');
             $adopter->setAddress($addresses[$randNb]);
-            $adopter->setRoles($roles);
             $manager->persist($adopter);
 
 

@@ -5,12 +5,13 @@ namespace App\DataFixtures;
 
 
 use App\Entity\Announcer;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use App\Repository\AddressRepository;
 use App\Repository\CategoryRepository;
 
-class AnnouncerFixtures extends \Doctrine\Bundle\FixturesBundle\Fixture implements DependentFixtureInterface
+class AnnouncerFixtures extends Fixture implements DependentFixtureInterface
 {
 protected $addressRepository;
 protected $categoryRepository;
@@ -90,12 +91,13 @@ public function __construct(AddressRepository $addressRepository, CategoryReposi
             'Michiyo',
             'Itoe',];
         $addresses = $this->addressRepository->findAll();
-        $randNb = rand(0, count($addresses)-1 );
+
         $categories = $this->categoryRepository->findAll();
-        $randNb2 = rand(0, count($categories)-1);
+
         for($i=1; $i<25;$i++){
+            $randNb = rand(0, count($addresses)-1 );
+            $randNb2 = rand(0, count($categories)-1);
            $announcer = new Announcer();
-           $announcer->setRoles(['announcer']);
            $announcer->setAddress($addresses[$randNb]);
            $announcer->setName($names[$i]);
            $announcer->setPassword($announcer->getName().'pass');
