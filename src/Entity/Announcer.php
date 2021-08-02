@@ -36,7 +36,7 @@ class Announcer extends User
     private $address;
 
     /**
-     * @ORM\OneToMany(targetEntity=Advertisement::class, mappedBy="announcer", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Advertisement::class, mappedBy="announcer", orphanRemoval=true, fetch="EAGER")
      */
     private $advertisements;
 

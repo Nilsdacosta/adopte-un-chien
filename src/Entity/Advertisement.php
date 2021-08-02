@@ -45,7 +45,7 @@ class Advertisement
     private $requests;
 
     /**
-     * @ORM\OneToMany(targetEntity=Dog::class, mappedBy="advertisement")
+     * @ORM\OneToMany(targetEntity=Dog::class, mappedBy="advertisement", fetch="EAGER")
      */
     private $dogs;
 

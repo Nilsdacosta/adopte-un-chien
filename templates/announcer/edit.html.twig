@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Announcer{% endblock %}
+
+{% block body %}
+    <h1>Edit Announcer</h1>
+
+    {{ include('announcer/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('announcer_index') }}">back to list</a>
+
+    {{ include('announcer/_delete_form.html.twig') }}
+{% endblock %}
