@@ -73,7 +73,7 @@
                                 
                             {% endfor %}</i>
                             <p class="card-text"> {{advertisement.description}} </p>
-                            <div><a href="{{ path('show_advertisement', { id: advertisement.id }) }}" class="btn buttonYellow">Voir l'annonce</a></div>
+                            <div><a href="{{ path('advertisement_show', { id: advertisement.id }) }}" class="btn buttonYellow">Voir l'annonce</a></div>
                         </div>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
             <div class="row justify-content-around">
             {% for announcer in announcers %}
                 
-                <a href="" class='d-flex justify-content-around flex-column d-inline-block advertisersCard'>
+                <a href="{{ path('announcer_show', { id: announcer.id }) }}" class='d-flex justify-content-around flex-column d-inline-block advertisersCard'>
                     <h6>{{announcer.name}}</h6>
                     <i>Nombres d'annonces: {{announcer.advertisements|length}}</i>
                     {% set adoptedDogsByAdvertiser = 0 %}
@@ -101,36 +101,6 @@
                     <i>Chiens adoptés: {{adoptedDogsByAdvertiser}} </i>
                 </a>
             {% endfor %}
-                {# <a href="" class='d-flex justify-content-around flex-column d-inline-block advertisersCard'>
-                    <h6>SPA de Lyon</h6>
-                    <i>Nombres d'annonces: 23</i>
-                    <i>Chiens adoptés: 124</i>
-                </a>
-                <a href="" class='d-flex justify-content-around flex-column d-inline-block advertisersCard'>
-                    <h6>SPA de Lyon</h6>
-                    <i>Nombres d'annonces: 23</i>
-                    <i>Chiens adoptés: 124</i>
-                </a>
-                <a href="" class='d-flex justify-content-around flex-column d-inline-block advertisersCard'>
-                    <h6>SPA de Lyon</h6>
-                    <i>Nombres d'annonces: 23</i>
-                    <i>Chiens adoptés: 124</i>
-                </a>
-                <a href="" class='d-flex justify-content-around flex-column d-inline-block advertisersCard'>
-                    <h6>SPA de Lyon</h6>
-                    <i>Nombres d'annonces: 23</i>
-                    <i>Chiens adoptés: 124</i>
-                </a>
-                <a href="" class='d-flex justify-content-around flex-column d-inline-block advertisersCard'>
-                    <h6>SPA de Lyon</h6>
-                    <i>Nombres d'annonces: 23</i>
-                    <i>Chiens adoptés: 124</i>
-                </a>
-                <a href="" class='d-flex justify-content-around flex-column d-inline-block advertisersCard'>
-                    <h6>SPA de Lyon</h6>
-                    <i>Nombres d'annonces: 23</i>
-                    <i>Chiens adoptés: 124</i>
-                </a> #}
             </div>
         </div>
     </section>
