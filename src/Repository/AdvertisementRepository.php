@@ -47,4 +47,17 @@ class AdvertisementRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * @return Advertisement[] Returns an array of Last fives Advertisement objects
+     */
+    public function findLastFiveAds()
+    {
+        return $this->createQueryBuilder('a')
+            ->setMaxResults(5)
+            ->orderBy('a.updateDate', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

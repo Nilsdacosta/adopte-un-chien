@@ -24,13 +24,13 @@ class Announcer extends User
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="announcer")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="announcers")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Address::class, inversedBy="announcer")
+     * @ORM\ManyToOne(targetEntity=Address::class, inversedBy="announcers")
      * @ORM\JoinColumn(nullable=false)
      */
     private $address;

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\AdvertisementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,7 +15,7 @@ class AdvertisementController extends AbstractController
     public function index(): Response
     {
         return $this->render('advertisement/index.html.twig', [
-            'controller_name' => 'AdvertisementController',
+            'controller_name' => 'AdvertisementController'
         ]);
     }
 }

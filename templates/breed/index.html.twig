@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BreedController!{% endblock %}
+
+{% block body %}
+
+<div class="col-6">
+
+    {{form_start(form)}}
+        {# {{form_row(form.name)}} #}
+        {{form_label(form.name)}}
+        {{form_widget(form.name)}}
+        {{form_errors(form.name)}}
+
+        {{form_row(form.description)}}
+   {{form_end(form)}}
+</div>
+{% endblock %}
