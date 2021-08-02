@@ -60,9 +60,10 @@ class Dog
     private $isAdopted;
 
     /**
-     * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="Dog", orphanRemoval=true)
-     */
+     * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="dog", orphanRemoval=true)
+     */ 
     private $pictures;
+    
 
     /**
      * @ORM\ManyToOne(targetEntity=Advertisement::class, inversedBy="dogs")
