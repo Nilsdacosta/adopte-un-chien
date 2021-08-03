@@ -1,4 +1,25 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{form_label(form.title, 'Titre de l\'annonce')}}
+    {{form_errors(form.title)}}
+    {{ form_widget(form.title) }}
+    {{form_label(form.description, 'Description')}}
+    {{form_errors(form.description)}}
+    {{ form_widget(form.description) }}
+    <hr>
+    <ul id="dog-fields-list"
+        data-prototype="{{ form_widget(form.dogs.vars.prototype)|e }}"
+        data-widget-tags="{{ '<li></li>'|e }}"
+        data-widget-counter="{{ form.dogs|length }}">
+    {% for dogField in form.dogs %}
+        <li>
+            {{ form_errors(dogField) }}
+            {{ form_widget(dogField) }}
+        </li>
+    {% endfor %}
+    </ul>
+    <h6 class="mt-2">Ajouter des chiens à l'annonce</h6>
+    <button class="btn buttonYellow add-another-collection-widget" data-list-selector="#dog-fields-list">Ajouter</button>
+    <button class="btn buttonRed remove-collection-widget" data-list-selector="#dog-fields-list">Retirer</button>
+    <hr>
+    <button class="btn buttonPurple mt-2">{{ button_label|default('Editer annonce') }}</button>
 {{ form_end(form) }}

@@ -14,6 +14,24 @@
 .buttonYellow:hover{
     background-color: #fed338c5;
 }
+.buttonRed{
+    background-color: #B0413E;
+    color: white;
+    border: 1px solid #2B2D42;
+}
+.buttonRed:hover{
+    background-color: #B0413Ec5;
+    color: white;
+}
+.buttonPurple{
+    background-color: #2B2D42;
+    color: white;
+    border: 1px solid #2B2D42;
+}
+.buttonPurple:hover{
+    background-color: #2B2D42c5;
+    color: white;
+}
 
 
 /* **************************** */
@@ -46,11 +64,14 @@ a, a:hover, a:focus, a:active {
     color: #2b2d42cb;
     cursor: pointer;
 }
-
 ul, li{
     list-style: none;
     padding: 0;
     margin: 0;
+}
+.widthForm{
+    max-width: 500px;
+    margin: auto;
 }
 
 /* ***************************** */
