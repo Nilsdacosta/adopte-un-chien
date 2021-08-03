@@ -3,28 +3,11 @@
 {% block title %}Accueil | Adopte un chien{% endblock %}
 
 {% block body %}
-    {# {% for advertisement in advertisements %}
-        <pre>
-            {{ dump(advertisement) }}
-        </pre>
-        {# {{ advertisement.title }} : #}
-        {# <ul>
-            {% for dog in advertisement.dogs %}
-                <li>
-                    {{ dog.name}}
-                    {% for breed in dog.breeds %}
-                        - {{breed.name}}
-                    {% endfor %}
-                </li>
-            {% endfor %}
-        </ul>
-    {% endfor %} #}
 
     <section id="lastAds">
         <h2>Nos dernières annonces</h2>
         {% for advertisement in advertisements %}
-        {% set activeSliderVerification = 1 %}
-        {{advertisement.id}}
+            {% set activeSliderVerification = 1 %}
             <article class="card container paddingReset">
                 <div class="row">
                     <div class="d-flex flex-row">

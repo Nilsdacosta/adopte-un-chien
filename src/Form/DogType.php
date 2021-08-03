@@ -72,7 +72,6 @@ class DogType extends AbstractType
             //->add('advertisement')
         ;
     }
-
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

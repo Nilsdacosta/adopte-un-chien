@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Advertisement;
+use App\Entity\Announcer;
 use App\Form\AdvertisementType;
 use App\Repository\AdvertisementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,9 +34,9 @@ class AdvertisementController extends AbstractController
         $advertisement = new Advertisement();
         $form = $this->createForm(AdvertisementType::class, $advertisement);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $advertisement->setAnnouncer($entityManager->getRepository(Announcer::class)->find(53));
             $entityManager->persist($advertisement);
             $entityManager->flush();
 

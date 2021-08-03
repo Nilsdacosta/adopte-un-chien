@@ -35,7 +35,7 @@ class Breed
     private $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Dog::class, inversedBy="breeds")
+     * @ORM\ManyToMany(targetEntity=Dog::class, inversedBy="breeds", cascade={"persist"})
      */
     private $dogs;
 

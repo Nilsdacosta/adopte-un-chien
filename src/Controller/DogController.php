@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Advertisement;
 use App\Entity\Dog;
 use App\Form\DogType;
 use App\Repository\DogRepository;
@@ -33,9 +34,11 @@ class DogController extends AbstractController
         $dog = new Dog();
         $form = $this->createForm(DogType::class, $dog);
         $form->handleRequest($request);
+        dump($form);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $dog->setAdvertisement($entityManager->getRepository(Advertisement::class)->find(1));
             $entityManager->persist($dog);
             $entityManager->flush();
 
