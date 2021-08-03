@@ -32,61 +32,9 @@
 
 <div style="background-color: #FAFAFA">
     <h2>Nos autres annonces - {{ activeAds }} annonces actives</h2>
+
 </div>
-        {% set activeSliderVerification = 1 %}
-        <article class="card container paddingReset">
-            <div class="row">
-                <div class="d-flex flex-row">
-                    {# Debut carousel
-                        id à changer pour chaque annonce
-                    #}
-                    <div  style="height: 280px" class="carousel slide col-3" data-bs-ride="carousel">
-                        <div class="carousel-inner w-100 h-100">
-                            {% for dog in activeAdsArray.dogs %}
-                                {% for picture in dog.pictures %}
-                                    {% if activeSliderVerification == 1 %}
-                                        <div class="carousel-item active w-100 h-100" data-bs-interval="10000">
-                                            <div class="bgImageAdDog w-100 h-100" style="background-image: url('{{picture.path}}')">
-                                            </div>
-                                        </div>
-                                        {% set activeSliderVerification = 2 %}
-                                    {% else %}
-                                        <div class="carousel-item w-100 h-100" data-bs-interval="10000">
-                                            <div class="bgImageAdDog w-100 h-100" style="background-image: url('{{picture.path}}')">
-                                            </div>
-                                        </div>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endfor %}
 
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#test{{advertisement.id}}" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#test{{advertisement.id}}" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                    {# Fin Carousel #}
-                    <div class="card-body d-flex flex-column justify-content-between">
-                        <h4 class="card-title text-center">{{advertisement.title}}</h4>
-                        <i>Chiens à la recherche d'une famille : <strong>{{advertisement.dogs|length}}</strong></i>
-
-                        <i>{% for dog in activeAdsArray.dogs %}
-                                <strong>{{dog.name}}: </strong>
-                                {% for breed in dog.breeds %}
-                                    {{breed.name}} |
-                                {% endfor %}
-
-                            {% endfor %}</i>
-                        <p class="card-text"> {{activeAds.description}} </p>
-                        <div><a href="{{ path('advertisement_show', { id: activeAds.id }) }}" class="btn buttonYellow">Voir l'annonce</a></div>
-                    </div>
-                </div>
-            </div>
-        </article>
     </div>
 
 
