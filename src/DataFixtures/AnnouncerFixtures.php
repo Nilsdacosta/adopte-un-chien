@@ -10,15 +10,17 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use App\Repository\AddressRepository;
 use App\Repository\CategoryRepository;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AnnouncerFixtures extends Fixture implements DependentFixtureInterface
 {
 protected $addressRepository;
 protected $categoryRepository;
 
-public function __construct(AddressRepository $addressRepository, CategoryRepository $categoryRepository)
+public function __construct(AddressRepository $addressRepository, CategoryRepository $categoryRepository, UserPasswordHasherInterface $passwordHasher)
 {
     $this->addressRepository = $addressRepository;
+    $this->passwordHasher = $passwordHasher;
     $this->categoryRepository = $categoryRepository;
 }
 
@@ -100,7 +102,7 @@ public function __construct(AddressRepository $addressRepository, CategoryReposi
            $announcer = new Announcer();
            $announcer->setAddress($addresses[$randNb]);
            $announcer->setName($names[$i]);
-           $announcer->setPassword($announcer->getName().'pass');
+           $announcer->setPassword($this->passwordHasher->hashPassword($announcer, $announcer->getName().'pass') );
            $announcer->setEmail($announcer->getName().'@yahoo.fr');
            $announcer->setCategory($categories[$randNb2]);
            $announcer->setDescription('"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."');

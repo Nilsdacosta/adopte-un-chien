@@ -32,8 +32,15 @@
                 </a>
             </ul>
         <div>
+        {% if user.roles is defined %}
+            <a href="{{ path('app_login') }}" class="liNavDeconnexion">
+                Déconnexion
+            </a>
+        {% else %}
+                
         <a href="{{ path('app_login') }}" class="liNavConnexion">
             Connexion
         </a>
+        {% endif %}
     </div>
 </nav>

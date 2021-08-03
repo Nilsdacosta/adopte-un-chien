@@ -10,14 +10,16 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use App\Repository\AddressRepository;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AdopterFixtures extends Fixture implements DependentFixtureInterface
 {
     protected $addressRepository;
-
-    public function __construct(AddressRepository $addressRepository )
+    
+    public function __construct(AddressRepository $addressRepository, UserPasswordHasherInterface $passwordHasher)
     {
         $this->addressRepository = $addressRepository;
+        $this->passwordHasher = $passwordHasher;
     }
 
     /**
@@ -128,7 +130,9 @@ class AdopterFixtures extends Fixture implements DependentFixtureInterface
             $adopter->setName($names[$i]);
             $adopter->setFirstname($firstnames[$i]);
             $adopter->setEmail($adopter->getName() . '@gmail.com');
-            $adopter->setPassword($adopter->getFirstname(). 'pass');
+            $adopter->setPassword(
+                $this->passwordHasher->hashPassword($adopter, $adopter->getFirstname().'pass')
+            );
             $adopter->setAddress($addresses[$randNb]);
             $manager->persist($adopter);
 
