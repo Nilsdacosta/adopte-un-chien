@@ -32,9 +32,9 @@
     background-color: #2B2D42c5;
     color: white;
 }
-
-
-
+.adsCard{
+    box-shadow: 0px 0px 5px -1px #2B2D42;
+}
 
 /* **************************** */
 /* ********** General ********* */
