@@ -32,7 +32,69 @@
 
 <div style="background-color: #FAFAFA">
     <h2>Nos autres annonces - {{ activeAds }} annonces actives</h2>
+    <div class="container p-0">
+        <div class="row">
+            {% for advertisement in activeAdsArray %}
+                {% set activeSliderVerification = 1 %}
+                {% if advertisement.isActive %}
+                    <article class="card container paddingReset  mb-4 adsCard" style='width:15rem'>
+                        <div class="row">
+                            <div class="d-flex flex-column">
+                                {# Debut carousel
+                                    id à changer pour chaque annonce
+                                #}
+                                <div id="test{{advertisement.id}}" style='height:200px' class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-inner w-100 h-100">
+                                        {% for dog in advertisement.dogs %}
+                                            {% for picture in dog.pictures %}
+                                                {% if activeSliderVerification == 1 %}
+                                                    <div class="carousel-item active w-100 h-100" data-bs-interval="10000">
+                                                        <div class="bgImageAdDog w-100 h-100" style="background-image: url('{{picture.path}}')">
+                                                        </div>
+                                                    </div>
+                                                    {% set activeSliderVerification = 2 %}
+                                                {% else %}
+                                                    <div class="carousel-item w-100 h-100" data-bs-interval="10000">
+                                                        <div class="bgImageAdDog w-100 h-100" style="background-image: url('{{picture.path}}')">
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endfor %}
 
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#test{{advertisement.id}}" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#test{{advertisement.id}}" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+                                {# Fin Carousel #}
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <h6 class="card-title text-center">{{advertisement.title}}</h6>
+                                    <hr class="m-0">
+                                    <i>Chien(s) à l'adoption : <strong>{{advertisement.dogs|length}}</strong></i>
+
+                                    <i class="mt-2">{% for dog in advertisement.dogs %}
+                                            <strong>{{dog.name}}: </strong>
+                                            {% for breed in dog.breeds %}
+                                                {{breed.name}} |
+                                            {% endfor %}
+                                        {% endfor %}</i>
+                                    <div class="mt-2"><a href="{{ path('advertisement_show', { id: advertisement.id }) }}" class="btn buttonYellow">Voir l'annonce</a></div>
+                                    <i style='font-size:smaller' class="mt-2" ><strong>Postée le</strong> {{advertisement.updateDate|date('d-m-Y')}} </i>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <a href="{{ path('advertisement_announcer', {id: announcer.id })}}" class="btn buttonYellow">Voir tout</a>
 </div>
 
     </div>

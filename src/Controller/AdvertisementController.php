@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\AnnouncerRepository;
 
 /**
  * @Route("/advertisement")
@@ -21,9 +22,20 @@ class AdvertisementController extends AbstractController
      */
     public function index(AdvertisementRepository $advertisementRepository): Response
     {
+
         return $this->render('advertisement/index.html.twig', [
             'advertisements' => $advertisementRepository->findAll(),
         ]);
+    }
+
+    /**
+     * @Route("/{id}", name="advertisement_announcer", methods={"GET"})
+     */
+    public function filterAnnouncer(int $id, AdvertisementRepository $advertisementRepository, AnnouncerRepository $announcerRepository) : Response
+    {
+        return $this->render('advertisement/index.html.twig', [
+            'advertisements' => $advertisementRepository->findBy(['announcer'=>$id]),
+    ]);
     }
 
     /**
