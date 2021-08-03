@@ -32,7 +32,9 @@
     background-color: #2B2D42c5;
     color: white;
 }
-
+.adsCard{
+    box-shadow: 0px 0px 5px -1px #2B2D42;
+}
 
 /* **************************** */
 /* ********** General ********* */
@@ -79,6 +81,7 @@ ul, li{
 /* ***************************** */
 #navBorder{
     border-bottom: 1px solid #2b2d42;
+    margin-bottom: 15px;
 }
 
 #logo{
@@ -94,7 +97,7 @@ ul, li{
     margin-left: 15px;
     background: linear-gradient(to top, rgba(43,45,66, 0.8) 0%, rgba(43,45,66, 0.8) 10%, transparent 10.01%) no-repeat left bottom / 0 100%;
     transition: background-size .5s;
-    font-size: larger;
+    font-size:larger;
 }
 .liNavSub:hover{
     color: #2B2D42;
@@ -192,4 +195,5 @@ footer{
     margin-bottom: 20px;
     text-align: center;
 }
+
 
