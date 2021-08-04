@@ -44,10 +44,10 @@ class Announcer extends User
     {
         $this->advertisements = new ArrayCollection();
     }
-public function getRoles(): array
-{
-    return ['ROLE_ANNOUNCER'];
-}
+    public function getRoles(): array
+    {
+        return ['ROLE_ANNOUNCER'];
+    }
 
     public function getName(): ?string
     {
