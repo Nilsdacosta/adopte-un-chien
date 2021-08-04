@@ -52,7 +52,7 @@ body, html{
 }
 #main{
     min-height:100%;
-    margin:0 auto;
+    margin: auto;
     position:relative;
     padding-bottom: 150px;
 }
@@ -115,6 +115,15 @@ ul, li{
 .liNavConnexion:hover{
     background-color: #2B2D42;
     color: white;
+}
+
+.liNavDeconnexion{
+    background-color: #2b2d42cb;
+    color: white;
+    border-radius: 7px;
+    padding: 10px 20px 10px 20px;
+    font-size: larger;
+    border: 1px solid white;
 }
 
 /* ***************************** */

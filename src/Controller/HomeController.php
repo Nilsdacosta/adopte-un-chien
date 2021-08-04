@@ -16,11 +16,9 @@ class HomeController extends AbstractController
      */
     public function index(AdvertisementRepository $advertisementRepository, AnnouncerRepository $announcerRepository): Response
     {
-        
         $advertisements = $advertisementRepository->findLastFiveAds();
         $announcers = $announcerRepository->findAll();
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
             'advertisements' => $advertisements,
             'announcers' => $announcers
         ]);
