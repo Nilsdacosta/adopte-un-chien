@@ -53,8 +53,25 @@ class AnnouncerController extends AbstractController
      */
     public function show(Announcer $announcer): Response
     {
+        $dogs = 0;
+        $ads = $announcer->getAdvertisements();
+        $activeAds = 0 ;
+        $activeAdsArray = [];
+        foreach ($ads as $ad){
+            if (! $ad->getIsActive()) {
+               $dogs += count($ad->getDogs());
+            } else {
+                array_push($activeAdsArray, $ad);
+                $activeAds = count($activeAdsArray);
+            }
+        }
+
         return $this->render('announcer/show.html.twig', [
             'announcer' => $announcer,
+            'dogs' => $dogs,
+            'activeAdsArray' => $activeAdsArray,
+            'activeAds' => $activeAds,
+            'map' => '../docs/img/map.png',
         ]);
     }
 
