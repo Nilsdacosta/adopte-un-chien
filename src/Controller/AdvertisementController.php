@@ -71,17 +71,6 @@ class AdvertisementController extends AbstractController
         ]);
     }
 
-    /**
-
-     * @Route("/{id}", name="advertisement_announcer", methods={"GET"})
-     */
-    public function filterAnnouncer(int $id, AdvertisementRepository $advertisementRepository, AnnouncerRepository $announcerRepository) : Response
-    {
-        return $this->render('advertisement/index.html.twig', [
-            'advertisements' => $advertisementRepository->findBy(['announcer'=>$id]),
-            'announcer' => $announcerRepository->find($id)
-    ]);
-    }
 
     /**
      * @Route("/{id}/show", name="advertisement_show", methods={"GET"})
