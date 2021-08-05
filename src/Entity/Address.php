@@ -167,4 +167,9 @@ class Address
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->getNumber().' '.$this->getStreet().' '.$this->getZipcode(). ' '.$this->getCity();
+    }
 }

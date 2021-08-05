@@ -30,7 +30,7 @@ class Announcer extends User
     private $category;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Address::class, inversedBy="announcers")
+     * @ORM\ManyToOne(targetEntity=Address::class, inversedBy="announcers", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $address;
@@ -44,10 +44,10 @@ class Announcer extends User
     {
         $this->advertisements = new ArrayCollection();
     }
-public function getRoles(): array
-{
-    return ['ROLE_ANNOUNCER'];
-}
+    public function getRoles(): array
+    {
+        return ['ROLE_ANNOUNCER'];
+    }
 
     public function getName(): ?string
     {

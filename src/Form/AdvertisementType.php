@@ -26,7 +26,6 @@ class AdvertisementType extends AbstractType
                 // Sinon il appel pas les adders (getters/setters)
                 'by_reference' => false
             ])
-            //->add('announcer')
         ;
     }
 
