@@ -40,7 +40,7 @@ class Advertisement
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity=Request::class, mappedBy="advertisement")
+     * @ORM\OneToMany(targetEntity=ContactRequest::class, mappedBy="advertisement")
      */
     private $requests;
 
@@ -118,14 +118,14 @@ class Advertisement
     }
 
     /**
-     * @return Collection|Request[]
+     * @return Collection|ContactRequest[]
      */
     public function getRequests(): Collection
     {
         return $this->requests;
     }
 
-    public function addRequest(Request $request): self
+    public function addRequest(ContactRequest $request): self
     {
         if (!$this->requests->contains($request)) {
             $this->requests[] = $request;
@@ -135,7 +135,7 @@ class Advertisement
         return $this;
     }
 
-    public function removeRequest(Request $request): self
+    public function removeRequest(ContactRequest $request): self
     {
         if ($this->requests->removeElement($request)) {
             // set the owning side to null (unless already changed)

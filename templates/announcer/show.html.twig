@@ -17,10 +17,11 @@
                                 Téléphone : {{ announcer.phoneNumber }}<br>
                             {%  endif %}
                             {%  if announcer.email!=null %}
-                            Email : {{ announcer.email }}</p>
-                        {%  endif %}
+                            Email : {{ announcer.email }}<br>
+                            {%  endif %}
                             Adresse : <a href="https://www.google.com/maps/search/?api=1&query={{ announcer.address.number }}+{{ announcer.address.street}}+{{ announcer.address.zipcode }}+{{ announcer.address.city }}">{{ announcer.address.number }} {{ announcer.address.street}}, {{ announcer.address.zipcode }} {{ announcer.address.city }}</a>
                     </div>
+                    </p>
                 </div>
                 <div class="col-5" id="map" style="background-image: url('{{ map }}'); background-position: center">
                 </div>
@@ -30,14 +31,18 @@
 
 
 
-<div style="background-color: #FAFAFA">
-    <h2>Nos autres annonces - {{ activeAds }} annonces actives</h2>
+<div style="background-color: #FAFAFA" class="mb-3 p-3">
+    <div class="d-flex justify-content-around align-items-center">
+        <h2 class="my-3">Nos autres annonces - {{ activeAds }} annonces actives</h2>
+        <a href="{{ path('advertisement_announcer', {id: announcer.id })}}" class="btn buttonPurple">Voir tout</a>
+    </div>
+
     <div class="container p-0">
-        <div class="row">
+        <div class="row d-flex flex-wrap" style="width: inherit; margin:0">
             {% for advertisement in activeAdsArray %}
                 {% set activeSliderVerification = 1 %}
                 {% if advertisement.isActive %}
-                    <article class="card container paddingReset  mb-4 adsCard" style='width:15rem'>
+                    <article class="card  paddingReset  mb-4 adsCard" style='width:25%'>
                         <div class="row">
                             <div class="d-flex flex-column">
                                 {# Debut carousel
@@ -49,13 +54,13 @@
                                             {% for picture in dog.pictures %}
                                                 {% if activeSliderVerification == 1 %}
                                                     <div class="carousel-item active w-100 h-100" data-bs-interval="10000">
-                                                        <div class="bgImageAdDog w-100 h-100" style="background-image: url('{{picture.path}}')">
+                                                        <div class="bgImageAdDog w-100 h-100" style="background-image: url('{{asset(picture.path)}}')">
                                                         </div>
                                                     </div>
                                                     {% set activeSliderVerification = 2 %}
                                                 {% else %}
                                                     <div class="carousel-item w-100 h-100" data-bs-interval="10000">
-                                                        <div class="bgImageAdDog w-100 h-100" style="background-image: url('{{picture.path}}')">
+                                                        <div class="bgImageAdDog w-100 h-100" style="background-image: url('{{asset(picture.path)}}')">
                                                         </div>
                                                     </div>
                                                 {% endif %}
@@ -94,8 +99,8 @@
             {% endfor %}
         </div>
     </div>
-    <a href="{{ path('advertisement_announcer', {id: announcer.id })}}" class="btn buttonYellow">Voir tout</a>
 </div>
+
 
     </div>
 

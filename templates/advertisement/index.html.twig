@@ -11,11 +11,11 @@
         
 
     <div class="container p-0">
-        <div class="row">
+        <div class="row m-0 d-flex flex-wrap" >
             {% for advertisement in advertisements %}
                 {% set activeSliderVerification = 1 %}
                 {% if advertisement.isActive %}
-                    <article class="card container paddingReset justify-content-between mb-4 adsCard" style='width:15rem'>
+                    <article class="card  mx-1 paddingReset  mb-4 adsCard" style='width:15rem'>
                         <div class="row">
                             <div class="d-flex flex-column">
                                 {# Debut carousel
@@ -27,13 +27,13 @@
                                             {% for picture in dog.pictures %}
                                                 {% if activeSliderVerification == 1 %}
                                                     <div class="carousel-item active w-100 h-100" data-bs-interval="10000">
-                                                        <div class="bgImageAdDog w-100 h-100" style="background-image: url('{{picture.path}}')">
+                                                        <div class="bgImageAdDog w-100 h-100" style="background-image: url('{{asset(picture.path)}}')">
                                                         </div>
                                                     </div>
                                                 {% set activeSliderVerification = 2 %}
                                                 {% else %}
                                                     <div class="carousel-item w-100 h-100" data-bs-interval="10000">
-                                                        <div class="bgImageAdDog w-100 h-100" style="background-image: url('{{picture.path}}')">
+                                                        <div class="bgImageAdDog w-100 h-100" style="background-image: url('{{asset(picture.path)}}')">
                                                         </div>
                                                     </div>
                                                 {% endif %}
