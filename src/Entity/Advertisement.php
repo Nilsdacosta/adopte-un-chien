@@ -40,7 +40,7 @@ class Advertisement
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity=Request::class, mappedBy="advertisement")
+     * @ORM\OneToMany(targetEntity=ContactRequest::class, mappedBy="advertisement")
      */
     private $requests;
 
