@@ -20,11 +20,19 @@
                         Accueil
                     </li>
                 </a>
+                {% if is_granted("ROLE_ANNOUNCER") %}
+                <a href="{{ path('advertisement_announcer', {id: app.user.id}) }}">
+                    <li class="nav-item liNav liNavSub">
+                        Vos annonces
+                    </li>
+                </a>
+                {% else %}
                 <a href="{{ path('advertisement_index') }}">
                     <li class="nav-item liNav liNavSub">
                         Nos annonces
                     </li>
                 </a>
+                {% endif %}
                 <a href="{{ path('faq') }}">
                     <li class="nav-item liNav liNavSub">
                         FAQ
@@ -32,8 +40,15 @@
                 </a>
             </ul>
         <div>
+        {% if app.user %}
+            <a href="{{ path('app_logout') }}" class="liNavDeconnexion">
+                Déconnexion
+            </a>
+        {% else %}
+                
         <a href="{{ path('app_login') }}" class="liNavConnexion">
             Connexion
         </a>
+        {% endif %}
     </div>
 </nav>

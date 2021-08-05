@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\AnnouncerRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/advertisement")
@@ -30,6 +31,7 @@ class AdvertisementController extends AbstractController
         ]);
     }
 
+
     /**
      * @Route("/{id}", name="advertisement_announcer", methods={"GET"})
      * @param int $id
@@ -46,6 +48,7 @@ class AdvertisementController extends AbstractController
     /**
      * @Route("/new", name="advertisement_new", methods={"GET","POST"})
      * @param Request $request
+     * @IsGranted("ROLE_ANNOUNCER")
      * @return Response
      */
     public function new(Request $request): Response
@@ -66,6 +69,18 @@ class AdvertisementController extends AbstractController
             'advertisement' => $advertisement,
             'form' => $form,
         ]);
+    }
+
+    /**
+
+     * @Route("/{id}", name="advertisement_announcer", methods={"GET"})
+     */
+    public function filterAnnouncer(int $id, AdvertisementRepository $advertisementRepository, AnnouncerRepository $announcerRepository) : Response
+    {
+        return $this->render('advertisement/index.html.twig', [
+            'advertisements' => $advertisementRepository->findBy(['announcer'=>$id]),
+            'announcer' => $announcerRepository->find($id)
+    ]);
     }
 
     /**
@@ -108,6 +123,7 @@ class AdvertisementController extends AbstractController
      * @param Request $request
      * @param Advertisement $advertisement
      * @return Response
+     * @IsGranted("ROLE_ANNOUNCER")
      */
     public function edit(Request $request, Advertisement $advertisement): Response
     {
@@ -131,6 +147,7 @@ class AdvertisementController extends AbstractController
      * @param Request $request
      * @param Advertisement $advertisement
      * @return Response
+     * @IsGranted("ROLE_ANNOUNCER")
      */
     public function delete(Request $request, Advertisement $advertisement): Response
     {

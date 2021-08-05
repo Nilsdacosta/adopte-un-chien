@@ -21,7 +21,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true, nullable=false)
@@ -29,23 +29,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *     message = "Cet email n'est pas valide"
      * )
      */
-    private $email;
+    protected $email;
 
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string", nullable=false, length=20)
+     * @ORM\Column(type="string", nullable=false, length=255)
      * @Assert\Length(
      *     min=6,
      *      minMessage = "Votre mot de passe doit contenir au minimum 6 caractères"
      *     )
      */
-    private $password;
+    protected $password;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $phoneNumber;
+    protected $phoneNumber;
 
 
     public function getId(): ?int
