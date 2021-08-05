@@ -43,7 +43,7 @@ class AdopterController extends AbstractController
             'action' => $this->generateUrl('adopter_new'),
         ]);
 
-        // On dit explicitement au formulaire de traiter ce que contient la requête (objet Request)
+        // On dit explicitement au formulaire de traiter ce que contient la requête (objet ContactRequest)
         $form->handleRequest($request);
 
         // On regarde si le formulaire a été soumis ET est valide

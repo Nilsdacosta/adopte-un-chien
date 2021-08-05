@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Request;
+use App\Entity\ContactRequest;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Request|null find($id, $lockMode = null, $lockVersion = null)
- * @method Request|null findOneBy(array $criteria, array $orderBy = null)
- * @method Request[]    findAll()
- * @method Request[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method ContactRequest|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ContactRequest|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ContactRequest[]    findAll()
+ * @method ContactRequest[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class RequestRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Request::class);
+        parent::__construct($registry, ContactRequest::class);
     }
 
     // /**
-    //  * @return Request[] Returns an array of Request objects
+    //  * @return ContactRequest[] Returns an array of ContactRequest objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class RequestRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Request
+    public function findOneBySomeField($value): ?ContactRequest
     {
         return $this->createQueryBuilder('r')
             ->andWhere('r.exampleField = :val')
