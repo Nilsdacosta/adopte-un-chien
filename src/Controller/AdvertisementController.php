@@ -19,6 +19,8 @@ class AdvertisementController extends AbstractController
 {
     /**
      * @Route("/", name="advertisement_index", methods={"GET"})
+     * @param AdvertisementRepository $advertisementRepository
+     * @return Response
      */
     public function index(AdvertisementRepository $advertisementRepository): Response
     {
@@ -30,8 +32,11 @@ class AdvertisementController extends AbstractController
 
     /**
      * @Route("/{id}", name="advertisement_announcer", methods={"GET"})
+     * @param int $id
+     * @param AdvertisementRepository $advertisementRepository
+     * @return Response
      */
-    public function filterAnnouncer(int $id, AdvertisementRepository $advertisementRepository, AnnouncerRepository $announcerRepository) : Response
+    public function filterAnnouncer(int $id, AdvertisementRepository $advertisementRepository) : Response
     {
         return $this->render('advertisement/index.html.twig', [
             'advertisements' => $advertisementRepository->findBy(['announcer'=>$id]),
@@ -40,6 +45,8 @@ class AdvertisementController extends AbstractController
 
     /**
      * @Route("/new", name="advertisement_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -62,17 +69,45 @@ class AdvertisementController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="advertisement_show", methods={"GET"})
+     * @Route("/{id}/show", name="advertisement_show", methods={"GET"})
+     * @param AdvertisementRepository $advertisementRepository
+     * @param int $id
+     * @return Response
      */
-    public function show(Advertisement $advertisement): Response
+    public function show(AdvertisementRepository $advertisementRepository, int $id): Response
     {
+        $ad = $advertisementRepository->find($id);
+        $announcer = $ad->getAnnouncer();
+        $activeAds = [];
+        foreach ($announcer->getAdvertisements() as $item1){
+            if($item1->getIsActive() == 1){
+                array_push($activeAds, $item1);
+            }
+        };
+        $dogs = [];
+        foreach($activeAds as $item){
+            foreach ($item->getDogs() as $dog){
+                if($dog->getIsAdopted() == 0){
+                    array_push($dogs, $dog);
+                }
+            }
+            }
+
+
         return $this->render('advertisement/show.html.twig', [
-            'advertisement' => $advertisement,
+            'advertisement' => $ad,
+            'activeAds' =>count($activeAds),
+            'nbDogs' => count($dogs) ,
+            'map' => '../docs/img/map.png',
+
         ]);
     }
 
     /**
      * @Route("/{id}/edit", name="advertisement_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Advertisement $advertisement
+     * @return Response
      */
     public function edit(Request $request, Advertisement $advertisement): Response
     {
@@ -93,6 +128,9 @@ class AdvertisementController extends AbstractController
 
     /**
      * @Route("/{id}", name="advertisement_delete", methods={"POST"})
+     * @param Request $request
+     * @param Advertisement $advertisement
+     * @return Response
      */
     public function delete(Request $request, Advertisement $advertisement): Response
     {

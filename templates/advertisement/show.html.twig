@@ -1,38 +1,123 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Advertisement{% endblock %}
+{% block title %}Annonce{% endblock %}
 
 {% block body %}
-    <h1>Advertisement</h1>
+    <div class="container">
+        <h1>{{ advertisement.title }}</h1>
+        <div class="d-flex justify-content-between">
+            <div class="col-7" id="{{ advertisement.id }}">
+             <p>{{ advertisement.description }}</p>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ advertisement.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ advertisement.title }}</td>
-            </tr>
-            <tr>
-                <th>UpdateDate</th>
-                <td>{{ advertisement.updateDate ? advertisement.updateDate|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>IsActive</th>
-                <td>{{ advertisement.isActive ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ advertisement.description }}</td>
-            </tr>
-        </tbody>
-    </table>
+                <div class="container p-0">
+                    <div class="row d-flex flex-wrap" style="width: inherit; margin:0">
+                        {%  if advertisement.dogs|length == 1 %}
+                            {% for dog in advertisement.dogs %}
+                                {% set activeSliderVerification = 1 %}
+                                {# Debut carousel  #}
+                                <div id="carousel{{dog.id}}" style='height:400px' class="carousel slide mb-5 px-0" data-bs-ride="carousel">
+                                    <div class="carousel-inner w-100 h-100">
+                                        {% for picture in dog.pictures %}
+                                            {% if activeSliderVerification == 1 %}
+                                                <div class="carousel-item active w-100 h-100" data-bs-interval="10000">
+                                                    <div class="bgImageAdDog w-100 h-100" style="background-image: url('{{asset(picture.path)}}')">
+                                                    </div>
+                                                </div>
+                                                {% set activeSliderVerification = 2 %}
+                                            {% else %}
+                                                <div class="carousel-item w-100 h-100" data-bs-interval="10000">
+                                                    <div class="bgImageAdDog w-100 h-100" style="background-image: url('{{asset(picture.path)}}')">
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        {%  endfor %}
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{dog.id}}" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carousel{{dog.id}}" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
 
-    <a href="{{ path('advertisement_index') }}">back to list</a>
 
-    <a href="{{ path('advertisement_edit', {'id': advertisement.id}) }}">edit</a>
+                                {# Fin Carousel #}
+                            <div class="d-flex flex-column justify-content-between px-0 ">
+                                <h6 class="card-title text-center">{{dog.name}}</h6>
+                                <hr class="m-0">
+                                <i class="mt-2">Date de naissance : {{ dog.dateOB|format_datetime('short', 'none', locale='fr')}} - Sexe : {% if dog.sex ==0  %} femelle {% else %} mâle {% endif %}</i>
+                                <hr class="m-0 mb-1">
+                                <p>LOF : {% if dog.lof ==0  %}non {% else %} oui {% endif %} </p> <p> Accepte les autres chiens : {% if dog.acceptDogs ==0  %} non {% else %} oui {% endif %}</p><p>Accepte les chats : {% if dog.acceptCats ==0  %} non {% else %} oui {% endif %}</p>
+                                <p class="overflow-auto" style="height: 200px">{{dog.history}}</p>
+                            </div>
+                            {%  endfor %}
+                        {% else %}
+                        {% for dog in advertisement.dogs %}
+                            {%  if dog.isAdopted == 0 %}
+                            {% set activeSliderVerification = 1 %}
+                            <article id="{{ dog.id }}" class="card  paddingReset d-flex flex-column mb-4 adsCard" style='width:50%'>
 
-    {{ include('advertisement/_delete_form.html.twig') }}
+                                            {# Debut carousel id à changer pour chaque annonce #}
+                                            <div id="carousel{{dog.id}}" style='height:200px' class="carousel slide" data-bs-ride="carousel">
+                                                     <div class="carousel-inner w-100 h-100">
+                                                         {% for picture in dog.pictures %}
+                                                            {% if activeSliderVerification == 1 %}
+                                                                <div class="carousel-item active w-100 h-100" data-bs-interval="10000">
+                                                                    <div class="bgImageAdDog w-100 h-100" style="background-image: url('{{asset(picture.path)}}')">
+                                                                    </div>
+                                                                </div>
+                                                                {% set activeSliderVerification = 2 %}
+                                                            {% else %}
+                                                                <div class="carousel-item w-100 h-100" data-bs-interval="10000">
+                                                                    <div class="bgImageAdDog w-100 h-100" style="background-image: url('{{asset(picture.path)}}')">
+                                                                    </div>
+                                                                </div>
+                                                            {% endif %}
+                                                         {%  endfor %}
+                                                     </div>
+                                                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{dog.id}}" data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Previous</span>
+                                                    </button>
+                                                    <button class="carousel-control-next" type="button" data-bs-target="#carousel{{dog.id}}" data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Next</span>
+                                                    </button>
+                                                </div>
+
+
+                                            {# Fin Carousel #}
+                                            <div class="card-body d-flex flex-column justify-content-between">
+                                                <h6 class="card-title text-center">{{dog.name}}</h6>
+                                                <hr class="m-0">
+                                                <i class="mt-2">Date de naissance : {{ dog.dateOB|format_datetime('short', 'none', locale='fr')}}</i>
+                                                <i class="mt-2">Sexe : {% if dog.sex ==0  %} femelle {% else %} mâle {% endif %}</i>
+                                                <hr class="m-0 mb-1">
+                                                <p>LOF : {% if dog.lof ==0  %}non {% else %} oui {% endif %} </p> <p> Accepte les autres chiens : {% if dog.acceptDogs ==0  %} non {% else %} oui {% endif %}</p><p>Accepte les chats : {% if dog.acceptCats ==0  %} non {% else %} oui {% endif %}</p>
+                                                <hr class="m-0 mb-1">
+                                                <p class="overflow-auto" style="height: 200px">{{ dog.history}}</p>
+                                            </div>
+
+
+                                </article>
+                            {%  endif %}
+                        {% endfor %}
+                        {%  endif %}
+                    </div>
+                </div>
+                <a href="" class="btn buttonPurple mb-5" style="width: 100%">Faire une demande pour cette annonce </a>
+             </div>
+            <div class="col-4 S p-3" style="background-color: #FAFAFA; display: inline-block" id="{{ advertisement.announcer.id }}">
+                <h2 class="text-center">{{ advertisement.announcer.name }}</h2>
+                <a class="buttonPurple btn mb-4" style="width: 100%" href="{{ path('announcer_show', {id:advertisement.announcer.id}) }}">Découvrir </a>
+                <a  href="https://www.google.com/maps/search/?api=1&query={{ advertisement.announcer.address.number }}+{{ advertisement.announcer.address.street}}+{{ advertisement.announcer.address.zipcode }}+{{ advertisement.announcer.address.city }}"><i class="fas fa-map-marker-alt" style="color: red"></i> {{ advertisement.announcer.address.number }} {{ advertisement.announcer.address.street}}, {{ advertisement.announcer.address.zipcode }} {{ advertisement.announcer.address.city }}</a>
+                <div class="my-3" style="background-image: url('{{ asset('docs/img/map.png') }}'); height:300px; background-position: center; background-size: cover " ></div>
+                <hr class="my-3" style="height: 3px; width: 100%">
+                <p>Annonces actives : {{ activeAds }}</p>
+                <p>Chien(s) en attente de famille : {{ nbDogs }}</p>
+            </div>
+        </div>
+    </div>
 {% endblock %}
