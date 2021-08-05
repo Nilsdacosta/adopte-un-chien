@@ -28,7 +28,7 @@ class Message
     private $dateOfSending;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Request::class, inversedBy="messages")
+     * @ORM\ManyToOne(targetEntity=ContactRequest::class, inversedBy="messages")
      */
     private $request;
 

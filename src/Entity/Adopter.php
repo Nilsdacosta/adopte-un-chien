@@ -24,7 +24,7 @@ class Adopter extends User
     private $firstname;
 
     /**
-     * @ORM\OneToMany(targetEntity=Request::class, mappedBy="adopter", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=ContactRequest::class, mappedBy="adopter", orphanRemoval=true)
      */
     private $requests;
 
