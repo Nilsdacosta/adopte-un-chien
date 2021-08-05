@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Admin\Field\AddressField;
 use App\Entity\Announcer;
 use App\Form\AddressType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -19,10 +20,9 @@ class AnnouncerCrudController extends AbstractCrudController
         return Announcer::class;
     }
 
-    
+
     public function configureFields(string $pageName): iterable
     {
-
         return [
             TextField::new('name'),
             EmailField::new('email'),
@@ -30,11 +30,8 @@ class AnnouncerCrudController extends AbstractCrudController
             AssociationField::new('category'),
             TextareaField::new('description'),
             FormField::addPanel('Adresse'),
-            CollectionField::new('address', [
-                // CollectionField::OPTION_ENTRY_IS_COMPLEX => true,
-                CollectionField::OPTION_ENTRY_TYPE => AddressType::class,
-            ]),
+            AddressField::new('address')
         ];
     }
-    
+
 }

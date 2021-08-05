@@ -30,7 +30,7 @@ class Announcer extends User
     private $category;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Address::class, inversedBy="announcers")
+     * @ORM\ManyToOne(targetEntity=Address::class, inversedBy="announcers", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $address;
