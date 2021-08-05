@@ -68,14 +68,14 @@ class Adopter extends User
     }
 
     /**
-     * @return Collection|Request[]
+     * @return Collection|ContactRequest[]
      */
     public function getRequests(): Collection
     {
         return $this->requests;
     }
 
-    public function addRequest(Request $request): self
+    public function addRequest(ContactRequest $request): self
     {
         if (!$this->requests->contains($request)) {
             $this->requests[] = $request;
@@ -85,7 +85,7 @@ class Adopter extends User
         return $this;
     }
 
-    public function removeRequest(Request $request): self
+    public function removeRequest(ContactRequest $request): self
     {
         if ($this->requests->removeElement($request)) {
             // set the owning side to null (unless already changed)

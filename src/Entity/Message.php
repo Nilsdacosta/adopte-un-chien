@@ -65,12 +65,12 @@ class Message
         return $this;
     }
 
-    public function getRequest(): ?Request
+    public function getRequest(): ?ContactRequest
     {
         return $this->request;
     }
 
-    public function setRequest(?Request $request): self
+    public function setRequest(?ContactRequest $request): self
     {
         $this->request = $request;
 
