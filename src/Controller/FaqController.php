@@ -3,12 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\Faq;
+use App\Form\ContactType;
 use App\Form\FaqType;
 use App\Repository\FaqRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 /**
  * @Route("/faq")
@@ -16,12 +20,32 @@ use Symfony\Component\Routing\Annotation\Route;
 class FaqController extends AbstractController
 {
     /**
-     * @Route("/", name="faq_index", methods={"GET"})
+     * @Route("/", name="faq_index", methods={"GET", "POST"})
      */
-    public function index(FaqRepository $faqRepository): Response
+    public function index(FaqRepository $faqRepository, Request $request, MailerInterface $mailer): Response
     {
+        $form = $this->createForm(ContactType::class);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $contactFormData = $form->getData();
+            $message = (new Email())
+                ->from($contactFormData['email'])
+                ->to('adopteunchiencda@gmail.com')
+                ->subject('vous avez reçu un email')
+                ->text('Sender : '.$contactFormData['email'].\PHP_EOL.
+                    $contactFormData['message'],
+                    'text/plain');
+            $mailer->send($message);
+
+            $this->addFlash('success', 'Vore message a été envoyé');
+
+            return $this->redirectToRoute('faq_index');
+        }
+        
         return $this->render('faq/index.html.twig', [
             'faqs' => $faqRepository->findAll(),
+            'form' => $form->createView()
         ]);
     }
 
