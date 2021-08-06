@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\AnnouncerRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Flex\Path;
 
 /**
  * @Route("/advertisement")
@@ -31,22 +32,8 @@ class AdvertisementController extends AbstractController
         ]);
     }
 
-
     /**
-     * @Route("/{id}", name="advertisement_announcer", methods={"GET"})
-     * @param int $id
-     * @param AdvertisementRepository $advertisementRepository
-     * @return Response
-     */
-    public function filterAnnouncer(int $id, AdvertisementRepository $advertisementRepository) : Response
-    {
-        return $this->render('advertisement/index.html.twig', [
-            'advertisements' => $advertisementRepository->findBy(['announcer'=>$id]),
-    ]);
-    }
-
-    /**
-     * @Route("/new", name="advertisement_new", methods={"GET","POST"})
+     * @Route("/new/", name="advertisement_new", methods={"GET","POST"})
      * @param Request $request
      * @IsGranted("ROLE_ANNOUNCER")
      * @return Response
@@ -58,19 +45,31 @@ class AdvertisementController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $advertisement->setAnnouncer($entityManager->getRepository(Announcer::class)->find(53));
+            $advertisement->setAnnouncer($this->getUser());
             $entityManager->persist($advertisement);
             $entityManager->flush();
 
             return $this->redirectToRoute('advertisement_index', [], Response::HTTP_SEE_OTHER);
         }
-
         return $this->renderForm('advertisement/new.html.twig', [
             'advertisement' => $advertisement,
             'form' => $form,
         ]);
     }
 
+    /**
+     * @Route("/{id}", name="advertisement_announcer", methods={"GET"})
+     * @param int $id
+     * @param AdvertisementRepository $advertisementRepository
+     * @return Response
+     */
+    public function filterAnnouncer(int $id, AdvertisementRepository $advertisementRepository, AnnouncerRepository $announcerRepository) : Response
+    {
+        return $this->render('advertisement/index.html.twig', [
+            'advertisements' => $advertisementRepository->findBy(['announcer'=>$id]),
+            'announcer' => $announcerRepository->find($id)
+    ]);
+    }
 
     /**
      * @Route("/{id}/show", name="advertisement_show", methods={"GET"})
@@ -95,15 +94,13 @@ class AdvertisementController extends AbstractController
                     array_push($dogs, $dog);
                 }
             }
-            }
-
+        }
 
         return $this->render('advertisement/show.html.twig', [
             'advertisement' => $ad,
             'activeAds' =>count($activeAds),
             'nbDogs' => count($dogs) ,
             'map' => '../docs/img/map.png',
-
         ]);
     }
 
@@ -116,23 +113,28 @@ class AdvertisementController extends AbstractController
      */
     public function edit(Request $request, Advertisement $advertisement): Response
     {
-        $form = $this->createForm(AdvertisementType::class, $advertisement);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('advertisement_index', [], Response::HTTP_SEE_OTHER);
+        if ($this->getUser() == $advertisement->getAnnouncer()) {
+            dd($advertisement);
+            $form = $this->createForm(AdvertisementType::class, $advertisement);
+            $form->handleRequest($request);
+    
+            if ($form->isSubmitted() && $form->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
+    
+                return $this->redirectToRoute('advertisement_index', [], Response::HTTP_SEE_OTHER);
+            }
+    
+            return $this->renderForm('advertisement/edit.html.twig', [
+                'advertisement' => $advertisement,
+                'form' => $form,
+            ]);
+        }else {
+            return $this->redirectToRoute('advertisement_index');
         }
-
-        return $this->renderForm('advertisement/edit.html.twig', [
-            'advertisement' => $advertisement,
-            'form' => $form,
-        ]);
     }
 
     /**
-     * @Route("/{id}", name="advertisement_delete", methods={"POST"})
+     * @Route("/{id}/delete", name="advertisement_delete", methods={"POST"})
      * @param Request $request
      * @param Advertisement $advertisement
      * @return Response
