@@ -3,35 +3,25 @@
 {% block title %}Faq index{% endblock %}
 
 {% block body %}
-    <h1>Faq index</h1>
+    <h1>FAQ</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Subject</th>
-                <th>Response</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for faq in faqs %}
-            <tr>
-                <td>{{ faq.id }}</td>
-                <td>{{ faq.subject }}</td>
-                <td>{{ faq.response }}</td>
-                <td>
-                    <a href="{{ path('faq_show', {'id': faq.id}) }}">show</a>
-                    <a href="{{ path('faq_edit', {'id': faq.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {% for faq in faqs %}
+        <div class="faq" >
+            <p class="questions">
+                <a data-bs-toggle="collapse" href="#collapse{{faq.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    {{ faq.subject }} | <strong>V</strong>
+                </a>
+            </p>
+            <div class="collapse responses" id="collapse{{faq.id}}">
+                <div class="card card-body">
+                    {{ faq.response }}    
+                </div>
+            </div>
+        </div>
+    {% else %}
+            <p>Il n'y a pas de FAQ pour le moment</p>
+    {% endfor %}
 
-    <a href="{{ path('faq_new') }}">Create new</a>
+    
+
 {% endblock %}

@@ -33,12 +33,18 @@
                     </li>
                 </a>
                 {% endif %}
-                {# <a href="{{ path('faq') }}"> #}
-                <a href="">
+                <a href="{{ path('faq_index') }}">
                     <li class="nav-item liNav liNavSub">
                         FAQ
                     </li>
                 </a>
+                {% if is_granted("ROLE_ADMIN") %}
+                <a href="{{ path('admin') }}">
+                    <li class="nav-item liNav liNavSub">
+                        Admin
+                    </li>
+                </a>
+                {% endif %}
             </ul>
         <div>
         {% if app.user %}
