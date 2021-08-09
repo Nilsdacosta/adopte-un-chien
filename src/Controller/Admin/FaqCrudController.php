@@ -2,16 +2,18 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Address;
+use App\Entity\Faq;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class AddressCrudController extends AbstractCrudController
+class FaqCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Address::class;
+        return Faq::class;
     }
 
     
@@ -19,14 +21,8 @@ class AddressCrudController extends AbstractCrudController
     {
         return [
             // IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
-
-
-            // ->add('number')
-            // ->add('street')
-            // ->add('zipcode')
-            // ->add('city')
+            TextField::new('subject'),
+            TextareaField::new('response'),
         ];
     }
     

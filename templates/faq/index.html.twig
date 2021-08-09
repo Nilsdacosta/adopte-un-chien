@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Faq index{% endblock %}
+
+{% block body %}
+    <h1>FAQ</h1>
+
+    {% for faq in faqs %}
+        <div class="faq" >
+            <p class="questions">
+                <a data-bs-toggle="collapse" href="#collapse{{faq.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    {{ faq.subject }} | <strong>V</strong>
+                </a>
+            </p>
+            <div class="collapse responses" id="collapse{{faq.id}}">
+                <div class="card card-body">
+                    {{ faq.response }}    
+                </div>
+            </div>
+        </div>
+    {% else %}
+            <p>Il n'y a pas de FAQ pour le moment</p>
+    {% endfor %}
+    <div class="col-sm-12">
+        {{ form_start(form) }}
+            <div class="form-group">
+            {{ form_row(form.nom, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.email, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.message, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Send" class="btn btn-primary py-3 px-5">
+            </div>
+        {{ form_end(form) }}
+    </div>
+    
+
+{% endblock %}
