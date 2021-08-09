@@ -29,7 +29,7 @@ class Adopter extends User
     private $requests;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Address::class, inversedBy="adopters")
+     * @ORM\ManyToOne(targetEntity=Address::class, inversedBy="adopters", cascade={"persist"})
      */
     private $address;
 
