@@ -3,14 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Advertisement;
-use App\Entity\Announcer;
 use App\Form\AdvertisementType;
 use App\Repository\AdvertisementRepository;
+use App\Repository\RequestRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\AnnouncerRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Flex\Path;
 
@@ -63,25 +62,30 @@ class AdvertisementController extends AbstractController
      * @param AdvertisementRepository $advertisementRepository
      * @return Response
      */
-    public function filterAnnouncer(int $id, AdvertisementRepository $advertisementRepository, AnnouncerRepository $announcerRepository) : Response
+
+    public function filterAnnouncer(int $id, AdvertisementRepository $advertisementRepository) : Response
     {
         return $this->render('advertisement/index.html.twig', [
             'advertisements' => $advertisementRepository->findBy(['announcer'=>$id]),
-            'announcer' => $announcerRepository->find($id)
     ]);
     }
 
+
     /**
      * @Route("/{id}/show", name="advertisement_show", methods={"GET"})
+     * @param RequestRepository $requestRepository
      * @param AdvertisementRepository $advertisementRepository
      * @param int $id
      * @return Response
      */
-    public function show(AdvertisementRepository $advertisementRepository, int $id): Response
+    public function show(RequestRepository $requestRepository, AdvertisementRepository $advertisementRepository, int $id): Response
     {
         $ad = $advertisementRepository->find($id);
         $announcer = $ad->getAnnouncer();
         $activeAds = [];
+        $adopter = $this->getUser();
+        $canRequest = $requestRepository->findOneBy(['adopter'=>$adopter, 'advertisement' =>$ad]);
+
         foreach ($announcer->getAdvertisements() as $item1){
             if($item1->getIsActive() == 1){
                 array_push($activeAds, $item1);
@@ -101,6 +105,7 @@ class AdvertisementController extends AbstractController
             'activeAds' =>count($activeAds),
             'nbDogs' => count($dogs) ,
             'map' => '../docs/img/map.png',
+            'canRequest'=>$canRequest,
         ]);
     }
 

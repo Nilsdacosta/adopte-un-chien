@@ -1,0 +1,27 @@
+{{ form_start(form) }}
+<div class="d-flex justify-content-between">
+<div class="col-5">
+<h4 class="widthForm">Vos coordonnées : </h4>
+{{ form_row(form.adopter.name) }}
+{{ form_row(form.adopter.firstname) }}
+{{ form_row(form.adopter.phoneNumber) }}</div>
+
+<div class="col-5">
+<h4 class="widthForm">Votre adresse postale : </h4>
+{{ form_row(form.adopter.address.number) }}
+{{ form_row(form.adopter.address.street) }}
+{{ form_row(form.adopter.address.zipcode) }}
+{{ form_row(form.adopter.address.city) }}</div>
+</div>
+<ul id="message-fields-list"
+    {% for messageField in form.messages %}
+        <li>
+            {{ form_errors(messageField) }}
+            {{ form_widget(messageField) }}
+        </li>
+    {% endfor %}
+</ul>
+
+    <button class="btn buttonPurple">{{ button_label|default('Envoyer') }}</button>
+<hr>
+{{ form_end(form) }}

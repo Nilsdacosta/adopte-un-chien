@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ContactRequest index{% endblock %}
+
+{% block body %}
+    <h1>ContactRequest index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DateOfRequest</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for contact_request in contact_requests %}
+            <tr>
+                <td>{{ contact_request.id }}</td>
+                <td>{{ contact_request.dateOfRequest ? contact_request.dateOfRequest|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('contact_request_show', {'id': contact_request.id}) }}">show</a>
+                    <a href="{{ path('contact_request_edit', {'id': contact_request.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}
