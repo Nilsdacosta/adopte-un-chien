@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Advertisement;
-use App\Entity\Announcer;
 use App\Form\AdvertisementType;
 use App\Repository\AdvertisementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,7 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\AnnouncerRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Flex\Path;
 
 /**
  * @Route("/advertisement")
@@ -68,7 +66,7 @@ class AdvertisementController extends AbstractController
         return $this->render('advertisement/index.html.twig', [
             'advertisements' => $advertisementRepository->findBy(['announcer'=>$id]),
             'announcer' => $announcerRepository->find($id)
-    ]);
+        ]);
     }
 
     /**
@@ -114,11 +112,20 @@ class AdvertisementController extends AbstractController
     public function edit(Request $request, Advertisement $advertisement): Response
     {
         if ($this->getUser() == $advertisement->getAnnouncer()) {
-            dd($advertisement);
+            // dd($advertisement);
             $form = $this->createForm(AdvertisementType::class, $advertisement);
             $form->handleRequest($request);
-    
+            $verif = 0;
             if ($form->isSubmitted() && $form->isValid()) {
+                foreach ($advertisement->getDogs() as $dog) {
+                    if ($dog->getIsAdopted() == true) {
+                        $verif += 1;
+                    }
+                }
+
+                if ($verif == sizeof($advertisement->getDogs()) ) {
+                    $advertisement->setIsActive(false);
+                }
                 $this->getDoctrine()->getManager()->flush();
     
                 return $this->redirectToRoute('advertisement_index', [], Response::HTTP_SEE_OTHER);
