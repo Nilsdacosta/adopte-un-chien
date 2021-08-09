@@ -3,12 +3,14 @@
 {% block title %}Nos annonces | Adopte un chien{% endblock %}
 
 {% block body %}
-    {% if announcer is defined %}
-        <h1> {{announcer.name}} </h1>
-    {% else %}
-        <h1>Toutes les annonces</h1>
+    {% if app.user is defined %}
+        {% if is_granted("ROLE_ANNOUNCER") %}
+            <a href="{{path('advertisement_new')}}" class="btn buttonYellow mb-2">Ajouter une annonce</a>
+        {% endif %}
     {% endif %}
-        
+    {% if announcer.name is defined %}
+        <h1> {{announcer.name}} </h1>
+    {% endif %}
 
     <div class="container p-0">
         <div class="row m-0 d-flex flex-wrap" >
@@ -64,6 +66,15 @@
                                     {% endfor %}</i>
                                     <div class="mt-2"><a href="{{ path('advertisement_show', { id: advertisement.id }) }}" class="btn buttonYellow">Voir l'annonce</a></div>
                                     <i style='font-size:smaller' class="mt-2" ><strong>Postée le</strong> {{advertisement.updateDate|date('d-m-Y')}} </i>
+                                    {% if app.user is defined %}
+                                        {% if is_granted("ROLE_ANNOUNCER") %}
+                                            {% if announcer.name is defined %}
+                                                {% if app.user.id == announcer.id %}
+                                                    <a href="{{path('advertisement_edit', {id: advertisement.id} )}}" class="btn buttonPurple mb-2">Modifier l'annonce</a>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
