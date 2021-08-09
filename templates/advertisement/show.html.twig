@@ -107,8 +107,12 @@
                         {%  endif %}
                     </div>
                 </div>
-                <a href="" class="btn buttonPurple mb-5" style="width: 100%">Faire une demande pour cette annonce </a>
-             </div>
+                {% if not canRequest  %}
+                <a href="{{ path('contact_request_new', {id:advertisement.id}) }}" class="btn buttonPurple mb-5" style="width: 100%">Faire une demande pour cette annonce </a>
+                     {%  else %}
+                <p class="text-center" style="color:green; font-weight: bold">Vous avez déjà fait une demande pour cette annonce</p>
+                {%  endif %}
+                 </div>
             <div class="col-4 S p-3" style="background-color: #FAFAFA; display: inline-block" id="{{ advertisement.announcer.id }}">
                 <h2 class="text-center">{{ advertisement.announcer.name }}</h2>
                 <a class="buttonPurple btn mb-4" style="width: 100%" href="{{ path('announcer_show', {id:advertisement.announcer.id}) }}">Découvrir </a>

@@ -21,7 +21,7 @@ class AdvertisementType extends AbstractType
                 'entry_type' => DogType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
-                // Sinon il appel pas les adders (getters/setters)
+                // Sinon il appelle pas les adders (getters/setters)
                 'by_reference' => false
             ])
         ;

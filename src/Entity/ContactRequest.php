@@ -20,7 +20,7 @@ class ContactRequest
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="request")
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="request", cascade={"persist"})
      */
     private $messages;
 
@@ -35,7 +35,7 @@ class ContactRequest
     private $dateOfRequest;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Adopter::class, inversedBy="requests")
+     * @ORM\ManyToOne(targetEntity=Adopter::class, inversedBy="requests", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $adopter;
