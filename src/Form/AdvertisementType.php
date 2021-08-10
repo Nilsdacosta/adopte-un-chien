@@ -18,6 +18,7 @@ class AdvertisementType extends AbstractType
             ->add('title', TextType::class )
             ->add('description', TextareaType::class)
             ->add('dogs', CollectionType::class,[
+                'label'=>false,
                 'entry_type' => DogType::class,
                 'allow_add' => true,
                 'allow_delete' => true,

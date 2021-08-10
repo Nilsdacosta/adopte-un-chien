@@ -4,9 +4,12 @@ namespace App\Form;
 
 use App\Entity\Breed;
 use App\Entity\Dog;
+use App\Entity\Picture;
+use App\Repository\PictureRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -73,6 +76,15 @@ class DogType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => true,
                 'expanded' => true
+            ])
+            ->add('pictures', EntityType::class,[
+                'label' => "Photo(s)",
+                'class' => Picture::class,
+                'choice_label' => 'path',
+                'multiple' => true,
+                'query_builder'=> function (PictureRepository $pr){
+                return $pr->createQueryBuilder('p') ->leftJoin('p.dog', 'd') ->andWhere('d.id IS NULL');
+                }
             ])
             //->add('advertisement')
         ;

@@ -38,7 +38,7 @@ class FaqController extends AbstractController
                     'text/plain');
             $mailer->send($message);
 
-            $this->addFlash('success', 'Vore message a été envoyé');
+            $this->addFlash('success', 'Votre message a été envoyé');
 
             return $this->redirectToRoute('faq_index');
         }
