@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Adopter;
+use App\Form\AdopterContactRequestType;
 use App\Form\AdopterType;
 use App\Repository\AdopterRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -62,5 +63,31 @@ class AdopterController extends AbstractController
         return $this->render('adopter/new.html.twig', [
             'form' => $form->createView(), // On crée un objet FormView, qui sert à l'affichage de notre formulaire
         ]);
+    }
+
+    /**
+     * @Route("/{id}/edit", name="adopter_edit", methods={"GET","POST"})
+     * @param Adopter $adopter
+     * @param Request $request
+     * @return Response
+     */
+    public function edit(Request $request, Adopter $adopter): Response
+    {
+        if ($this->getUser() == $adopter) {
+            $form = $this->createForm(AdopterContactRequestType::class, $adopter);
+            $form->handleRequest($request);
+    
+            if ($form->isSubmitted() && $form->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
+    
+                return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
+            }
+    
+            return $this->renderForm('adopter/edit.html.twig', [
+                'adopter' => $adopter,
+                'form' => $form,
+            ]);
+        }
+        return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
     }
 }

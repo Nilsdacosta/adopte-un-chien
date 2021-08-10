@@ -48,6 +48,15 @@
             </ul>
         <div>
         {% if app.user %}
+            {% if is_granted("ROLE_ADOPTER") or is_granted("ROLE_ANNOUNCER") %}
+                <a href=" {{path('message_index' )}} "><i class="far fa-envelope profile"></i></a>
+                {# A faire 
+                {% if condition %}
+                {% endif %} #}
+            {% endif %}
+            {% if is_granted("ROLE_ADOPTER") %}
+                <a href=" {{path('adopter_edit', {id: app.user.id} )}} "><i class="far fa-user-circle profile"></i></a>
+            {% endif %}
             <a href="{{ path('app_logout') }}" class="liNavDeconnexion">
                 Déconnexion
             </a>
