@@ -47,13 +47,35 @@
                 {% endif %}
             </ul>
         <div>
+
         {% if app.user %}
             {% if is_granted("ROLE_ADOPTER") or is_granted("ROLE_ANNOUNCER") %}
+                {% set nb=0 %}
+                {% if is_granted('ROLE_ADOPTER') %}
+                    {% for request in app.user.requests %}
+                        {%  for message in request.messages %}
+                            {%  if message.isRead == 0 %}
+                               {% set nb = nb+1 %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                {% else%}
+                    {%  for advertisement in app.user.advertisements %}
+                        {% for request in advertisement.requests %}
+                            {% for message in request.messages %}
+                                {% if message.isRead == 0 %}
+                                    {% set nb = nb+1 %}
+                                {% endif%}
+                            {% endfor%}
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
                 <a href=" {{path('message_index' )}} "><i class="far fa-envelope profile"></i></a>
-                {# A faire 
-                {% if condition %}
-                {% endif %} #}
+                {% if nb != 0 %}
+                    <p> {{ nb }}</p>
+                {%  endif %}
             {% endif %}
+
             {% if is_granted("ROLE_ADOPTER") %}
                 <a href=" {{path('adopter_edit', {id: app.user.id} )}} "><i class="far fa-user-circle profile"></i></a>
             {% endif %}
@@ -61,10 +83,9 @@
                 Déconnexion
             </a>
         {% else %}
-                
-        <a href="{{ path('app_login') }}" class="liNavConnexion">
-            Connexion
-        </a>
+            <a href="{{ path('app_login') }}" class="liNavConnexion">
+                Connexion
+            </a>
         {% endif %}
     </div>
 </nav>
