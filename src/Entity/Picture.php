@@ -24,7 +24,7 @@ class Picture
 
     /**
      * @ORM\ManyToOne(targetEntity=Dog::class, inversedBy="pictures")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $dog;
 
