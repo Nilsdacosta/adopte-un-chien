@@ -63,13 +63,13 @@ class AdvertisementController extends AbstractController
      * @param AdvertisementRepository $advertisementRepository
      * @return Response
      */
+
     public function filterAnnouncer(AdvertisementRepository $advertisementRepository, Announcer $announcer) : Response
     {
         return $this->render('advertisement/index.html.twig', [
             'advertisements' => $advertisementRepository->findBy(['announcer' => $announcer]),
             'announcer' => $announcer,
         ]);
-
     }
 
 

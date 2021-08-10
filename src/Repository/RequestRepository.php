@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\ContactRequest;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,32 +20,38 @@ class RequestRepository extends ServiceEntityRepository
         parent::__construct($registry, ContactRequest::class);
     }
 
-    // /**
-    //  * @return ContactRequest[] Returns an array of ContactRequest objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param $adopter
+     * @return ContactRequest[] Returns an array of ContactRequest objects
+     */
+    public function findByAdopterFilterByDate($adopter)
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('r.adopter = :val')
+            ->setParameter('val', $adopter)
+            ->join('r.messages', 'm')
+            ->orderBy('m.dateOfSending', 'DESC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?ContactRequest
+
+    /**
+     * @param $announcer
+     * @return ContactRequest[] Returns an array of ContactRequest objects
+     */
+    public function findByAnnouncerFilterByDate($announcer)
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
+            ->join('r.advertisement', 'a')
+            ->andWhere('a.announcer = :val')
+            ->setParameter('val', $announcer)
+            ->join('r.messages', 'm')
+            ->orderBy('m.dateOfSending', 'DESC')
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult()
+            ;
     }
-    */
+
 }

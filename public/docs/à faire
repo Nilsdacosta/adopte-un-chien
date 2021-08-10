@@ -1,2 +1,14 @@
 mettre les contacts en linkable
 faire une entité pour la FAQ
+
+Rajouter une api sur l’application
+
+api platform
+grafikart : tuto pour créer api
+composer require api
+→installe l’api pack
+
+dans les annotations en dessous de l'orm : @apiRessource()
+se connecter sur le localhost en ajoutant /api
+
+authentification : clé api ou Jwt

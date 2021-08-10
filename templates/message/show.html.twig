@@ -3,28 +3,26 @@
 {% block title %}Message{% endblock %}
 
 {% block body %}
-    <h1>Message</h1>
+    <h1>{{ request.advertisement.title }}</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ message.id }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ message.content }}</td>
-            </tr>
-            <tr>
-                <th>DateOfSending</th>
-                <td>{{ message.dateOfSending ? message.dateOfSending|date('Y-m-d') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <a href="{{ path('message_index') }}">back to list</a>
+{% for message in request.messages %}
+<div class="border mb-2">
+    {{ message.dateOfSending|date('d/m/Y') }}
+    <br>
+    {{ message.content }}
+</div>
 
-    <a href="{{ path('message_edit', {'id': message.id}) }}">edit</a>
+{%  endfor %}
+{%  if (is_granted('ROLE_ADOPTER') and request.messages|length >1) or is_granted('ROLE_ANNOUNCER') %}
+    {{ include ('message/_form.html.twig') }}
 
-    {{ include('message/_delete_form.html.twig') }}
+    {%  else %}
+<p>Vous ne pouvez pas encore répondre à ce message</p>
+    {%  endif %}
+    <a href="{{ path('message_index') }}">Retour aux conversations</a>
+
+
+
+
 {% endblock %}
