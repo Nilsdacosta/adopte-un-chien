@@ -1,0 +1,18 @@
+{{ form_start(form) }}
+<div class="d-flex justify-content-between">
+<div class="col-5">
+<h4 class="widthForm">Vos coordonnées : </h4>
+{{ form_row(form.name) }}
+{{ form_row(form.firstname) }}
+{{ form_row(form.phoneNumber) }}</div>
+
+<div class="col-5">
+<h4 class="widthForm">Votre adresse postale : </h4>
+{{ form_row(form.address.number) }}
+{{ form_row(form.address.street) }}
+{{ form_row(form.address.zipcode) }}
+{{ form_row(form.address.city) }}</div>
+</div>
+    <button class="btn buttonPurple">{{ button_label|default('Envoyer') }}</button>
+<hr>
+{{ form_end(form) }}

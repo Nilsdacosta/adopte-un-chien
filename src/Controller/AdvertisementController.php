@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Advertisement;
+use App\Entity\Announcer;
 use App\Form\AdvertisementType;
 use App\Repository\AdvertisementRepository;
+use App\Repository\AnnouncerRepository;
 use App\Repository\RequestRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -57,16 +59,15 @@ class AdvertisementController extends AbstractController
 
     /**
      * @Route("/{id}", name="advertisement_announcer", methods={"GET"})
-     * @param int $id
+     * @param Announcer $announcer
      * @param AdvertisementRepository $advertisementRepository
      * @return Response
      */
-
-    public function filterAnnouncer(int $id, AdvertisementRepository $advertisementRepository) : Response
+    public function filterAnnouncer(AdvertisementRepository $advertisementRepository, Announcer $announcer) : Response
     {
         return $this->render('advertisement/index.html.twig', [
-            'advertisements' => $advertisementRepository->findBy(['announcer'=>$id]),
-            'announcer' => $announcerRepository->find($id)
+            'advertisements' => $advertisementRepository->findBy(['announcer' => $announcer]),
+            'announcer' => $announcer,
         ]);
 
     }
@@ -120,7 +121,6 @@ class AdvertisementController extends AbstractController
     public function edit(Request $request, Advertisement $advertisement): Response
     {
         if ($this->getUser() == $advertisement->getAnnouncer()) {
-            // dd($advertisement);
             $form = $this->createForm(AdvertisementType::class, $advertisement);
             $form->handleRequest($request);
             $verif = 0;

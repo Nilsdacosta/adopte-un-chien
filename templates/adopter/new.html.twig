@@ -7,15 +7,15 @@
     <div class="container mb-5 d-flex flex-column align-items-center ">
 
         <h1 class="text-center my-4">Inscription</h1>
-            <div class="col-4 ">
-                <div class="text-center">
-{{ form_row(form.email) }}
-                    {{ form_row(form.password) }}
+        <div class="col-4 ">
+            <div class="text-center">
+                {{ form_row(form.email) }}
+                {{ form_row(form.password) }}
 
-                    <button type='submit' class="btn btn-primary">S'inscrire</button>
-                </div>
+                <button type='submit' class="btn btn-primary">S'inscrire</button>
+            </div>
 
-             </div>
+        </div>
   </div>
     {{ form_end(form) }}
 {% endblock %}
