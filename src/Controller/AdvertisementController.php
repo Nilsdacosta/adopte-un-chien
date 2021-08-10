@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Advertisement;
+use App\Entity\Announcer;
 use App\Form\AdvertisementType;
 use App\Repository\AdvertisementRepository;
 use App\Repository\RequestRepository;
@@ -57,18 +58,17 @@ class AdvertisementController extends AbstractController
 
     /**
      * @Route("/{id}", name="advertisement_announcer", methods={"GET"})
-     * @param int $id
+     * @param Announcer $announcer
      * @param AdvertisementRepository $advertisementRepository
      * @return Response
      */
 
-    public function filterAnnouncer(int $id, AdvertisementRepository $advertisementRepository) : Response
+    public function filterAnnouncer(Announcer $announcer, AdvertisementRepository $advertisementRepository) : Response
     {
         return $this->render('advertisement/index.html.twig', [
-            'advertisements' => $advertisementRepository->findBy(['announcer'=>$id]),
-            'announcer' => $announcerRepository->find($id)
+            'advertisements' => $advertisementRepository->findBy(['announcer'=>$announcer]),
+            'announcer' => $announcer,
         ]);
-
     }
 
 
