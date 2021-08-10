@@ -125,6 +125,11 @@ ul, li{
     font-size: larger;
     border: 1px solid white;
 }
+.profile {
+    font-size: 30px;
+    margin-right: 10px;
+}
+
 
 /* ***************************** */
 /* ********** Footer *********** */
