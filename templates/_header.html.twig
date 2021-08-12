@@ -46,7 +46,7 @@
                 </a>
                 {% endif %}
             </ul>
-        <div>
+
 
         {% if app.user %}
             {% if is_granted("ROLE_ADOPTER") or is_granted("ROLE_ANNOUNCER") %}
@@ -59,21 +59,23 @@
                             {% endif %}
                         {% endfor %}
                     {% endfor %}
-                {% else%}
+                {% else %}
                     {%  for advertisement in app.user.advertisements %}
                         {% for request in advertisement.requests %}
                             {% for message in request.messages %}
                                 {% if message.isRead == 0 %}
-                                    {% set nb = nb+1 %}
-                                {% endif%}
-                            {% endfor%}
+                                    {% set nb = nb + 1 %}
+                                {% endif %}
+                            {% endfor %}
                         {% endfor %}
                     {% endfor %}
                 {% endif %}
-                <a href=" {{path('message_index' )}} "><i class="far fa-envelope profile"></i></a>
-                {% if nb != 0 %}
-                    <p> {{ nb }}</p>
-                {%  endif %}
+                <div class="notification">
+                    <a href=" {{path('message_index' )}} "><i class="far fa-envelope profile"></i></a>
+                    {% if nb != 0 %}
+                        <p>{{ nb }}</p>
+                    {%  endif %}
+                </div>
             {% endif %}
 
             {% if is_granted("ROLE_ADOPTER") %}
@@ -87,5 +89,7 @@
                 Connexion
             </a>
         {% endif %}
+        <div>
+
     </div>
 </nav>
