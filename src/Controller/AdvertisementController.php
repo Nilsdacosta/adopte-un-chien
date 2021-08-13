@@ -28,7 +28,7 @@ class AdvertisementController extends AbstractController
     {
 
         return $this->render('advertisement/index.html.twig', [
-            'advertisements' => $advertisementRepository->findAll(),
+            'advertisements' => $advertisementRepository->findByActiveAds(),
         ]);
     }
 
@@ -49,7 +49,7 @@ class AdvertisementController extends AbstractController
             $entityManager->persist($advertisement);
             $entityManager->flush();
 
-            return $this->redirectToRoute('advertisement_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('advertisement_announcer', ['id'=>$advertisement->getAnnouncer()->getId()], Response::HTTP_SEE_OTHER);
         }
         return $this->renderForm('advertisement/new.html.twig', [
             'advertisement' => $advertisement,
@@ -120,6 +120,8 @@ class AdvertisementController extends AbstractController
      */
     public function edit(Request $request, Advertisement $advertisement): Response
     {
+
+
         if ($this->getUser() == $advertisement->getAnnouncer()) {
             $form = $this->createForm(AdvertisementType::class, $advertisement);
             $form->handleRequest($request);
@@ -129,14 +131,16 @@ class AdvertisementController extends AbstractController
                     if ($dog->getIsAdopted() == true) {
                         $verif += 1;
                     }
+
                 }
 
                 if ($verif == sizeof($advertisement->getDogs()) ) {
                     $advertisement->setIsActive(false);
                 }
+                $advertisement->setUpdateDate(new \DateTime('now'));
                 $this->getDoctrine()->getManager()->flush();
     
-                return $this->redirectToRoute('advertisement_index', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('advertisement_announcer', ['id'=>$this->getUser()->getID()], Response::HTTP_SEE_OTHER);
             }
     
             return $this->renderForm('advertisement/edit.html.twig', [

@@ -12,3 +12,7 @@ dans les annotations en dessous de l'orm : @apiRessource()
 se connecter sur le localhost en ajoutant /api
 
 authentification : clé api ou Jwt
+
+fait : request pour afficher seulement les annonces actives
+redirection vers ses annonces après modification/ajout d'une annonce
+changé posté en mis à jour (pas encore sur toutes les pages)

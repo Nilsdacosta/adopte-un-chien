@@ -82,8 +82,9 @@ class DogType extends AbstractType
                 'class' => Picture::class,
                 'choice_label' => 'path',
                 'multiple' => true,
+                'expanded'=>true,
                 'query_builder'=> function (PictureRepository $pr){
-                return $pr->createQueryBuilder('p') ->leftJoin('p.dog', 'd') ->andWhere('d.id IS NULL');
+                return $pr->createQueryBuilder('p') ->andWhere('p.dog IS NULL');
                 }
             ])
             //->add('advertisement')
