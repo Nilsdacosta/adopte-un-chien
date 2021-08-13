@@ -19,34 +19,21 @@ class AdvertisementRepository extends ServiceEntityRepository
         parent::__construct($registry, Advertisement::class);
     }
 
-    // /**
-    //  * @return Advertisement[] Returns an array of Advertisement objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+    * @return Advertisement[] Returns an array of Advertisement objects
+    */
+
+    public function findByActiveAds()
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('a.isActive = :val')
+            ->setParameter('val', true)
+            ->orderBy('a.updateDate', 'DESC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Advertisement
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 
     /**
      * @return Advertisement[] Returns an array of Last fives Advertisement objects

@@ -17,6 +17,8 @@ class PictureController extends AbstractController
 {
     /**
      * @Route("/", name="picture_index", methods={"GET"})
+     * @param PictureRepository $pictureRepository
+     * @return Response
      */
     public function index(PictureRepository $pictureRepository): Response
     {
@@ -27,6 +29,8 @@ class PictureController extends AbstractController
 
     /**
      * @Route("/new", name="picture_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -50,6 +54,8 @@ class PictureController extends AbstractController
 
     /**
      * @Route("/{id}", name="picture_show", methods={"GET"})
+     * @param Picture $picture
+     * @return Response
      */
     public function show(Picture $picture): Response
     {

@@ -71,7 +71,7 @@
                                         {% endfor %}
                                     {% endfor %}</i>
                                     <div class="mt-2"><a href="{{ path('advertisement_show', { id: advertisement.id }) }}" class="btn buttonYellow">Voir l'annonce</a></div>
-                                    <i style='font-size:smaller' class="mt-2" ><strong>Postée le</strong> {{advertisement.updateDate|date('d-m-Y')}} </i>
+                                    <i style='font-size:smaller' class="mt-2" ><strong>Mis à jour le</strong> {{advertisement.updateDate|date('d-m-Y')}} </i>
                                     {% if app.user is defined %}
                                         {% if is_granted("ROLE_ANNOUNCER") %}
                                             {% if announcer.name is defined %}
