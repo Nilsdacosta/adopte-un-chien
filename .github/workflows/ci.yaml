@@ -5,8 +5,10 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Pour que tout soit bien installé => Merci Remi
     container: drakona/php:7.4-ci
     services:
+    # C'est le path de la database
       db: 
         image: mysql:5.7
         env:
@@ -14,8 +16,19 @@ jobs:
           MYSQL_DATABASE: adopte-un-chien
 
     steps:
+      # On récupère le projet
       - uses: actions/checkout@v2
+      # On copie le .env.ci pour github
       - run: cp .env.ci .env
       - run: composer install
       - run: php bin/console doctrine:migrations:migrate -n
       - run: php bin/console doctrine:fixtures:load -n
+  analysis:
+    runs-on: ubuntu-latest
+    # Pour que tout soit bien installé => Merci Remi
+    container: drakona/php:7.4-ci
+    steps:
+      - uses: actions/checkout@v2
+      - run: composer install
+      - run: cp .env.ci .env
+      - run: php-cs-fixer src --dry-run --diff
