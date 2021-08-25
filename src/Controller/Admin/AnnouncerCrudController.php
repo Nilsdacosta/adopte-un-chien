@@ -33,5 +33,4 @@ class AnnouncerCrudController extends AbstractCrudController
             AddressField::new('address')
         ];
     }
-
 }

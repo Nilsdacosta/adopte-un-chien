@@ -29,11 +29,10 @@ class MessageController extends AbstractController
     {
         $user = $this->getUser();
 
-        if(in_array('ROLE_ADOPTER', $user->getRoles())){
+        if (in_array('ROLE_ADOPTER', $user->getRoles())) {
             $requests = $requestRepository->findByAdopterFilterByDate($user);
         } else {
             $requests =$requestRepository->findByAnnouncerFilterByDate($user);
-
         }
 
 
@@ -49,9 +48,9 @@ class MessageController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function show(ContactRequest $contactRequest,  Request $request): Response
+    public function show(ContactRequest $contactRequest, Request $request): Response
     {
-        foreach ($contactRequest->getMessages() as $mess){
+        foreach ($contactRequest->getMessages() as $mess) {
             $mess->setIsRead(true);
             $this->getDoctrine()->getManager()->persist($mess);
         }
@@ -74,7 +73,4 @@ class MessageController extends AbstractController
 
         ]);
     }
-
-
-
 }

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\DataFixtures;
-
 
 use App\Entity\Advertisement;
 use App\Entity\ContactRequest;
@@ -14,14 +12,14 @@ use Doctrine\Persistence\ObjectManager;
 
 class RequestFixtures extends Fixture implements DependentFixtureInterface
 {
-protected $advertisementRepository;
-protected $adopterRepository;
+    protected $advertisementRepository;
+    protected $adopterRepository;
 
-public function __construct(AdvertisementRepository $advertisementRepository, AdopterRepository $adopterRepository)
-{
-    $this->adopterRepository = $adopterRepository;
-    $this->advertisementRepository = $advertisementRepository;
-}
+    public function __construct(AdvertisementRepository $advertisementRepository, AdopterRepository $adopterRepository)
+    {
+        $this->adopterRepository = $adopterRepository;
+        $this->advertisementRepository = $advertisementRepository;
+    }
 
     /**
      * @inheritDoc
@@ -34,18 +32,18 @@ public function __construct(AdvertisementRepository $advertisementRepository, Ad
 
 
         $request1 = new ContactRequest();
-        $request1->setAdopter($adopters[rand(0, count($adopters)-1 )]);
-        $request1->setAdvertisement($ads[rand(0, count($ads)-1 )]);
+        $request1->setAdopter($adopters[rand(0, count($adopters)-1)]);
+        $request1->setAdvertisement($ads[rand(0, count($ads)-1)]);
         $request1->setDateOfRequest(new \DateTime('05/04/2021'));
 
         $request2 = new ContactRequest();
-        $request2->setAdopter($adopters[rand(0, count($adopters)-1 )]);
-        $request2->setAdvertisement($ads[rand(0, count($ads)-1 )]);
+        $request2->setAdopter($adopters[rand(0, count($adopters)-1)]);
+        $request2->setAdvertisement($ads[rand(0, count($ads)-1)]);
         $request2->setDateOfRequest(new \DateTime('07/08/2021'));
 
         $request3 = new ContactRequest();
-        $request3->setAdopter($adopters[rand(0, count($adopters)-1 )]);
-        $request3->setAdvertisement($ads[rand(0, count($ads)-1 )]);
+        $request3->setAdopter($adopters[rand(0, count($adopters)-1)]);
+        $request3->setAdvertisement($ads[rand(0, count($ads)-1)]);
         $request3->setDateOfRequest(new \DateTime('09/262021'));
 
         $manager->persist($request1);
@@ -56,6 +54,6 @@ public function __construct(AdvertisementRepository $advertisementRepository, Ad
 
     public function getDependencies()
     {
-       return [AdvertisementFixtures::class, AdopterFixtures::class];
+        return [AdvertisementFixtures::class, AdopterFixtures::class];
     }
 }

@@ -16,9 +16,8 @@ class ContactRequestType extends AbstractType
     {
         $builder
             ->add('adopter', AdopterContactRequestType::class)
-            ->add('messages', CollectionType::class,[
+            ->add('messages', CollectionType::class, [
             'entry_type' => MessageType::class,]);
-
     }
 
     public function configureOptions(OptionsResolver $resolver)

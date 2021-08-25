@@ -45,7 +45,8 @@ class Message
      */
     private $isRead;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->dateOfSending = new \DateTime('now');
         $this->isRead = false;
     }

@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-
 use App\Repository\AdvertisementRepository;
 use App\Repository\AnnouncerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

@@ -18,7 +18,6 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
  */
 class AdopterController extends AbstractController
 {
-
     /**
      * @Route("/", name="adopter_index", methods={"GET"})
      */
@@ -76,13 +75,13 @@ class AdopterController extends AbstractController
         if ($this->getUser() == $adopter) {
             $form = $this->createForm(AdopterContactRequestType::class, $adopter);
             $form->handleRequest($request);
-    
+
             if ($form->isSubmitted() && $form->isValid()) {
                 $this->getDoctrine()->getManager()->flush();
-    
+
                 return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
             }
-    
+
             return $this->renderForm('adopter/edit.html.twig', [
                 'adopter' => $adopter,
                 'form' => $form,

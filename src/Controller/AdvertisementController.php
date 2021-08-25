@@ -26,7 +26,6 @@ class AdvertisementController extends AbstractController
      */
     public function index(AdvertisementRepository $advertisementRepository): Response
     {
-
         return $this->render('advertisement/index.html.twig', [
             'advertisements' => $advertisementRepository->findByActiveAds(),
         ]);
@@ -64,7 +63,7 @@ class AdvertisementController extends AbstractController
      * @return Response
      */
 
-    public function filterAnnouncer(AdvertisementRepository $advertisementRepository, Announcer $announcer) : Response
+    public function filterAnnouncer(AdvertisementRepository $advertisementRepository, Announcer $announcer): Response
     {
         return $this->render('advertisement/index.html.twig', [
             'advertisements' => $advertisementRepository->findBy(['announcer' => $announcer]),
@@ -88,15 +87,15 @@ class AdvertisementController extends AbstractController
         $adopter = $this->getUser();
         $canRequest = $requestRepository->findOneBy(['adopter'=>$adopter, 'advertisement' =>$ad]);
 
-        foreach ($announcer->getAdvertisements() as $item1){
-            if($item1->getIsActive() == 1){
+        foreach ($announcer->getAdvertisements() as $item1) {
+            if ($item1->getIsActive() == 1) {
                 array_push($activeAds, $item1);
             }
         };
         $dogs = [];
-        foreach($activeAds as $item){
-            foreach ($item->getDogs() as $dog){
-                if($dog->getIsAdopted() == 0){
+        foreach ($activeAds as $item) {
+            foreach ($item->getDogs() as $dog) {
+                if ($dog->getIsAdopted() == 0) {
                     array_push($dogs, $dog);
                 }
             }
@@ -120,8 +119,6 @@ class AdvertisementController extends AbstractController
      */
     public function edit(Request $request, Advertisement $advertisement): Response
     {
-
-
         if ($this->getUser() == $advertisement->getAnnouncer()) {
             $form = $this->createForm(AdvertisementType::class, $advertisement);
             $form->handleRequest($request);
@@ -131,23 +128,22 @@ class AdvertisementController extends AbstractController
                     if ($dog->getIsAdopted() == true) {
                         $verif += 1;
                     }
-
                 }
 
-                if ($verif == sizeof($advertisement->getDogs()) ) {
+                if ($verif == sizeof($advertisement->getDogs())) {
                     $advertisement->setIsActive(false);
                 }
                 $advertisement->setUpdateDate(new \DateTime('now'));
                 $this->getDoctrine()->getManager()->flush();
-    
+
                 return $this->redirectToRoute('advertisement_announcer', ['id'=>$this->getUser()->getID()], Response::HTTP_SEE_OTHER);
             }
-    
+
             return $this->renderForm('advertisement/edit.html.twig', [
                 'advertisement' => $advertisement,
                 'form' => $form,
             ]);
-        }else {
+        } else {
             return $this->redirectToRoute('advertisement_index');
         }
     }
