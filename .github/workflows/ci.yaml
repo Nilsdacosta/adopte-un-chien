@@ -32,4 +32,4 @@ jobs:
       - run: composer install
       - run: cp .env.ci .env
       - run: curl -L https://cs.symfony.com/download/php-cs-fixer-v3.phar -o php-cs-fixer
-      - run: php-cs-fixer src --dry-run --diff
+      - run: ./php-cs-fixer.phar src --dry-run --diff
