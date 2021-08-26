@@ -29,6 +29,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - run: composer install
       - name: Set correct env file
         run: cp .env.ci .env.local
 
@@ -41,4 +42,4 @@ jobs:
         run: ./php-cs-fixer.phar fix src --dry-run --diff
 
       - name: Run PHP Stan
-        run: vendor/bin/phpstan.phar analyse
+        run: vendor/bin/phpstan analyse
