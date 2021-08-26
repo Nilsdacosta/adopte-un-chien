@@ -1,0 +1,6 @@
+parameters:
+    excludes_analyse:
+        - '%currentWorkingDirectory%/src/Kernel.php'
+    level: 5
+    paths:
+        - src
