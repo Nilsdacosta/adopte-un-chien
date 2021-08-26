@@ -41,4 +41,4 @@ jobs:
         run: ./php-cs-fixer.phar fix src --dry-run --diff
 
       - name: Run PHP Stan
-        run: vendor/bin/phpstan analyse
+        run: vendor/bin/phpstan.phar analyse
