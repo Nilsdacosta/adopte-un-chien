@@ -40,7 +40,7 @@ class AdvertisementFixtures extends Fixture implements DependentFixtureInterface
             $ad->setAnnouncer($announcers[$randNb]);
             $ad->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ');
             $ad->setTitle($breeds[$randNb2]->getName().' à adopter ! ');
-            $ad->setIsActive(rand(0, 1));
+            $ad->setIsActive((bool) rand(0, 1));
             $ad->setUpdateDate($date);
             $manager->persist($ad);
         }

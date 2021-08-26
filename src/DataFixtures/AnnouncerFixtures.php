@@ -14,6 +14,7 @@ class AnnouncerFixtures extends Fixture implements DependentFixtureInterface
 {
     protected $addressRepository;
     protected $categoryRepository;
+    private $userPassword;
 
     public function __construct(AddressRepository $addressRepository, CategoryRepository $categoryRepository, UserPasswordHasherInterface $userPassword)
     {

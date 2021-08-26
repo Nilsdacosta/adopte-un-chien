@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use App\Entity\Announcer;
+use App\Entity\Adopter;
 use App\Entity\ContactRequest;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
@@ -21,7 +23,7 @@ class RequestRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param $adopter
+     * @param Adopter $adopter
      * @return ContactRequest[] Returns an array of ContactRequest objects
      */
     public function findByAdopterFilterByDate($adopter)
@@ -38,7 +40,7 @@ class RequestRepository extends ServiceEntityRepository
 
 
     /**
-     * @param $announcer
+     * @param Announcer $announcer
      * @return ContactRequest[] Returns an array of ContactRequest objects
      */
     public function findByAnnouncerFilterByDate($announcer)

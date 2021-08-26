@@ -17,7 +17,7 @@ class AddressFixtures extends Fixture
             $address = new Address();
             $address->setCity($cities[array_rand($cities, 1)]);
             $address->setStreet($streets[array_rand($streets, 1)]);
-            $address->setZipcode(rand(10000, 89000));
+            $address->setZipcode((string) rand(10000, 89000));
             $address->setNumber(rand(1, 150));
             $manager->persist($address);
         }

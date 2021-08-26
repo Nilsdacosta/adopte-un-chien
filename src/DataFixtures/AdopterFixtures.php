@@ -12,6 +12,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class AdopterFixtures extends Fixture implements DependentFixtureInterface
 {
     protected $addressRepository;
+    private $userPassword;
 
     public function __construct(AddressRepository $addressRepository, UserPasswordHasherInterface $userPassword)
     {

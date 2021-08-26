@@ -93,13 +93,13 @@ class DogFixtures extends Fixture implements DependentFixtureInterface
             $dog = new Dog();
             $dog->setAdvertisement($item);
             $dog->setName($names[$randNb]);
-            $dog->setAcceptCats(rand(0, 1));
-            $dog->setAcceptDogs(rand(0, 1));
+            $dog->setAcceptCats((bool) rand(0, 1));
+            $dog->setAcceptDogs((bool) rand(0, 1));
             $dog->setDateOB($date);
             $dog->setHistory('"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.');
-            $dog->setIsAdopted(rand(0, 1));
-            $dog->setSex(rand(0, 1));
-            $dog->setLof(rand(0, 1));
+            $dog->setIsAdopted((bool) rand(0, 1));
+            $dog->setSex((bool) rand(0, 1));
+            $dog->setLof((bool) rand(0, 1));
             $dog->addBreed($breeds[$randNb2]);
             $manager->persist($dog);
         }

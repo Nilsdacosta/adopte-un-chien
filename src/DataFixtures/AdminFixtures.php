@@ -9,6 +9,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AdminFixtures extends Fixture
 {
+    private $userPassword;
+
     public function __construct(UserPasswordHasherInterface $userPassword)
     {
         $this->userPassword = $userPassword;
