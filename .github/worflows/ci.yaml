@@ -1,0 +1,40 @@
+name: onPush
+# On donne une liste d'événements pour le déclencher
+# Ici, dès qu'on push sur le repo distant
+on: [push]
+
+# On liste les Jobs à effectuer
+jobs:
+    build:
+          runs-on: ubuntu-latest
+          container: drakona/php:7.4 -ci
+          services:
+              db:
+                  image: mysql:5.7
+                  env:
+                    MYSQL_ROTT_PASSORD: root
+                    MYSQL_DATABASE: adopte-un-chien
+
+           steps:
+             - uses: actions/checkout@v2
+             - run: cp .env.ci .env
+             - run: composer install
+             - run: php bin/console doctrine:migrations:migrate -n
+             - run: php bin/console doctrine:fixtures:load -n
+
+    analysis:
+          runs-on: ubuntu-latest
+
+          steps:
+             - uses: actions/checkout@v2
+
+             - name: Set correct env file
+                run: cp .env.ci .env.local
+
+             - name: Install PHP CS Fixer
+                run: |
+                  curl -L https://cs.symfony.com/download/php-cs-fixer-v3.phar -o php-cs-fixer.phar
+                  chmod a+x ./php-cs-fixer.phar
+
+             - name: Run PHP CS Fixer check
+                run: ./php-cs-fixer.phar fix src --dry-run --diff

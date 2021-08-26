@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\DataFixtures;
-
 
 use App\Entity\Admin;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -11,6 +9,10 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AdminFixtures extends Fixture
 {
+    /**
+     * @var UserPasswordHasherInterface
+     */
+    private $userPassword;
 
     public function __construct(UserPasswordHasherInterface $userPassword)
     {
@@ -37,5 +39,4 @@ class AdminFixtures extends Fixture
 
         $manager->flush();
     }
-
 }

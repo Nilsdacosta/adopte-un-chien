@@ -14,7 +14,7 @@ class AddressCrudController extends AbstractCrudController
         return Address::class;
     }
 
-    
+
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -29,5 +29,4 @@ class AddressCrudController extends AbstractCrudController
             // ->add('city')
         ];
     }
-    
 }

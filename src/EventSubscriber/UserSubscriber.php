@@ -29,7 +29,7 @@ class UserSubscriber implements EventSubscriberInterface
     {
         return [
             BeforeEntityPersistedEvent::class => ['addUser'],
-            BeforeEntityUpdatedEvent::class => ['updateUser'], 
+            BeforeEntityUpdatedEvent::class => ['updateUser'],
         ];
     }
 

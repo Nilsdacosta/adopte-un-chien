@@ -53,5 +53,4 @@ class RequestRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
-
 }

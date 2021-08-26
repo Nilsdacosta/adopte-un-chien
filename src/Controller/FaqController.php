@@ -13,7 +13,6 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 /**
  * @Route("/faq")
  */
@@ -27,22 +26,24 @@ class FaqController extends AbstractController
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $contactFormData = $form->getData();
             $message = (new Email())
                 ->from($contactFormData['email'])
                 ->to('adopteunchiencda@gmail.com')
                 ->subject('vous avez reçu un email')
-                ->text('Sender : '.$contactFormData['email'].\PHP_EOL.
+                ->text(
+                    'Sender : '.$contactFormData['email'].\PHP_EOL.
                     $contactFormData['message'],
-                    'text/plain');
+                    'text/plain'
+                );
             $mailer->send($message);
 
             $this->addFlash('success', 'Votre message a été envoyé');
 
             return $this->redirectToRoute('faq_index');
         }
-        
+
         return $this->render('faq/index.html.twig', [
             'faqs' => $faqRepository->findAll(),
             'form' => $form->createView()

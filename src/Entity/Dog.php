@@ -68,9 +68,9 @@ class Dog
 
     /**
      * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="dog", orphanRemoval=true)
-     */ 
+     */
     private $pictures;
-    
+
 
     /**
      * @ORM\ManyToOne(targetEntity=Advertisement::class, inversedBy="dogs")

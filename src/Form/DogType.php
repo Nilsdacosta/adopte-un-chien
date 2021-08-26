@@ -21,16 +21,16 @@ class DogType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class,[
+            ->add('name', TextType::class, [
                 'label' => "Nom du chien"
-            ] )
-            ->add('dateOB', DateType::class,[
+            ])
+            ->add('dateOB', DateType::class, [
                 'label' => "Date de naissance"
             ])
-            ->add('history', TextareaType::class,[
+            ->add('history', TextareaType::class, [
                 'label' => "Son histoire"
             ])
-            ->add('lof', ChoiceType::class,[
+            ->add('lof', ChoiceType::class, [
                 'label' => "LOF",
                 'choices' => [
                     'Oui' => true,
@@ -38,7 +38,7 @@ class DogType extends AbstractType
                 ],
                 'expanded' => true
             ])
-            ->add('acceptCats', ChoiceType::class,[
+            ->add('acceptCats', ChoiceType::class, [
                 'label' => "Accepte t\'il nos amis les chats",
                 'choices' => [
                     'Oui' => true,
@@ -46,7 +46,7 @@ class DogType extends AbstractType
                 ],
                 'expanded' => true
             ])
-            ->add('acceptDogs', ChoiceType::class,[
+            ->add('acceptDogs', ChoiceType::class, [
                 'label' => "Accepte t\'il ses amis les chiens",
                 'choices' => [
                     'Oui' => true,
@@ -54,7 +54,7 @@ class DogType extends AbstractType
                 ],
                 'expanded' => true
             ])
-            ->add('isAdopted', ChoiceType::class,[
+            ->add('isAdopted', ChoiceType::class, [
                 'label' => "Est adopté",
                 'choices' => [
                     'Oui' => true,
@@ -62,7 +62,7 @@ class DogType extends AbstractType
                 ],
                 'expanded' => true
             ])
-            ->add('sex', ChoiceType::class,[
+            ->add('sex', ChoiceType::class, [
                 'label' => "Sex",
                 'choices' => [
                     'Mâle' => true,
@@ -70,21 +70,21 @@ class DogType extends AbstractType
                 ],
                 'expanded' => true
             ])
-            ->add('breeds', EntityType::class,[
+            ->add('breeds', EntityType::class, [
                 'label' => "Race(s)",
                 'class' => Breed::class,
                 'choice_label' => 'name',
                 'multiple' => true,
                 'expanded' => true
             ])
-            ->add('pictures', EntityType::class,[
+            ->add('pictures', EntityType::class, [
                 'label' => "Photo(s)",
                 'class' => Picture::class,
                 'choice_label' => 'path',
                 'multiple' => true,
                 'expanded'=>true,
-                'query_builder'=> function (PictureRepository $pr){
-                return $pr->createQueryBuilder('p') ->andWhere('p.dog IS NULL');
+                'query_builder'=> function (PictureRepository $pr) {
+                    return $pr->createQueryBuilder('p') ->andWhere('p.dog IS NULL');
                 }
             ])
             //->add('advertisement')

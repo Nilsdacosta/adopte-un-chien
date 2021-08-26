@@ -57,9 +57,9 @@ class AnnouncerController extends AbstractController
         $ads = $announcer->getAdvertisements();
         $activeAds = 0 ;
         $activeAdsArray = [];
-        foreach ($ads as $ad){
+        foreach ($ads as $ad) {
             if (! $ad->getIsActive()) {
-               $dogs += count($ad->getDogs());
+                $dogs += count($ad->getDogs());
             } else {
                 array_push($activeAdsArray, $ad);
                 $activeAds = count($activeAdsArray);

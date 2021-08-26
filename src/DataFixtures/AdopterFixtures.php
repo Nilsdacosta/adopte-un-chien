@@ -1,9 +1,6 @@
 <?php
 
-
 namespace App\DataFixtures;
-
-
 
 use App\Entity\Adopter;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -15,6 +12,10 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class AdopterFixtures extends Fixture implements DependentFixtureInterface
 {
     protected $addressRepository;
+    /**
+     * @var UserPasswordHasherInterface
+     */
+    private $userPassword;
 
     public function __construct(AddressRepository $addressRepository, UserPasswordHasherInterface $userPassword)
     {
@@ -125,7 +126,7 @@ class AdopterFixtures extends Fixture implements DependentFixtureInterface
             'Bass', 'Da Costa', 'SaintGeorges', 'Hermant', 'Poirier', 'Ragot'];
 
         for ($i = 0; $i < 50; $i++) {
-            $randNb = rand(0, count($addresses)-1 );
+            $randNb = rand(0, count($addresses)-1);
             $adopter = new Adopter();
             $adopter->setName($names[$i]);
             $adopter->setFirstname($firstnames[$i]);
@@ -133,8 +134,6 @@ class AdopterFixtures extends Fixture implements DependentFixtureInterface
             $adopter->setPassword($this->userPassword->hashPassword($adopter, $adopter->getFirstname(). 'pass'));
             $adopter->setAddress($addresses[$randNb]);
             $manager->persist($adopter);
-
-
         }
         $manager->flush();
     }

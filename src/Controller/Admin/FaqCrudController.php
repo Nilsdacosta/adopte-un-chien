@@ -16,7 +16,7 @@ class FaqCrudController extends AbstractCrudController
         return Faq::class;
     }
 
-    
+
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -25,5 +25,4 @@ class FaqCrudController extends AbstractCrudController
             TextareaField::new('response'),
         ];
     }
-    
 }

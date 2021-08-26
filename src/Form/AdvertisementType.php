@@ -15,9 +15,9 @@ class AdvertisementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class )
+            ->add('title', TextType::class)
             ->add('description', TextareaType::class)
-            ->add('dogs', CollectionType::class,[
+            ->add('dogs', CollectionType::class, [
                 'label'=>false,
                 'entry_type' => DogType::class,
                 'allow_add' => true,

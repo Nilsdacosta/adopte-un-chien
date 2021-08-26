@@ -12,7 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Adopter extends User
 {
-
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
@@ -111,6 +110,6 @@ class Adopter extends User
 
     public function __toString()
     {
-       return (string) $this->name;
+        return (string) $this->name;
     }
 }

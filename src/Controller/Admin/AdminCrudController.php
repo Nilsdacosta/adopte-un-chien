@@ -16,7 +16,7 @@ class AdminCrudController extends AbstractCrudController
         return Admin::class;
     }
 
-    
+
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -24,7 +24,7 @@ class AdminCrudController extends AbstractCrudController
             EmailField::new('email'),
             TextField::new('plainPassword')->hideOnIndex(),
             TextField::new('phoneNumber'),
-            
+
         ];
     }
 }
