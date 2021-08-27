@@ -15,22 +15,22 @@ class Adopter extends User
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $name;
+    private ?string $name;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $firstname;
+    private ?string $firstname;
 
     /**
      * @ORM\OneToMany(targetEntity=ContactRequest::class, mappedBy="adopter", orphanRemoval=true)
      */
-    private $requests;
+    private ?Collection $requests;
 
     /**
      * @ORM\ManyToOne(targetEntity=Address::class, inversedBy="adopters", cascade={"persist"})
      */
-    private $address;
+    private ?Collection $address;
 
     public function __construct()
     {
@@ -67,7 +67,7 @@ class Adopter extends User
     }
 
     /**
-     * @return Collection|ContactRequest[]
+     * @return Collection<int, ContactRequest>
      */
     public function getRequests(): Collection
     {

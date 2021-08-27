@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+  app:
+    image: drakona/php:7.4-symfony-no-npm
+    depends_on:
+      - db
+    volumes:
+      - .:/srv
+
+  nginx:
+    image: drakona/nginx:symfony
+    depends_on:
+      - app
+    volumes:
+      - .:/srv
+    ports:
+      - "8000:80"
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: adopte-un-chien
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  pma:
+    image: phpmyadmin:latest
+    restart: always
+    links:
+      - db:db
+    ports:
+      - 8080:80
+
+  mailhog:
+    image: mailhog/mailhog
+    logging:
+      driver: 'none'
+    ports:
+      - '8025:8025'
+      - '1025:1025'
+
+volumes:
+  db-data: {}
